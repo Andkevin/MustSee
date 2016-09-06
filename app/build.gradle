@@ -17,6 +17,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        xiaomi {
+            manifestPlaceholders = [CHANNEL: "xiaomi"];
+        }
+        _360 {
+            manifestPlaceholders = [CHANNEL: "_360"];
+        }
+        huawei {
+            manifestPlaceholders = [CHANNEL: "huawei"];
+        }
+        meizu {
+            manifestPlaceholders = [CHANNEL: "meizu"];
+        }
+    }
 }
 
 dependencies {
@@ -33,4 +48,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile project(':vitamio')
     compile 'com.android.support:design:23.3.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
