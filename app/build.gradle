@@ -10,6 +10,18 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        //JPush
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.android1604.mustsee",
+                JPUSH_APPKEY : "8d33bfac2a809a0ffbc575c0", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -49,4 +61,5 @@ dependencies {
     compile project(':vitamio')
     compile 'com.android.support:design:23.3.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'cn.jiguang:jpush:2.1.8'
 }

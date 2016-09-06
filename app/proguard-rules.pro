@@ -50,6 +50,14 @@ public static final int *;
 }
 
 #友盟混淆规则end
+#JPush混淆规则start
+-dontoptimize
+-dontpreverify
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+#JPush混淆规则end
+
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
