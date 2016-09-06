@@ -18,9 +18,9 @@ android {
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
         manifestPlaceholders = [
-                JPUSH_PKGNAME : "com.android1604.mustsee",
+                JPUSH_PKGNAME: "com.android1604.mustsee",
                 JPUSH_APPKEY : "8d33bfac2a809a0ffbc575c0", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     buildTypes {
@@ -49,6 +49,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile project(':refreshlibrary')
+    compile project(':vitamio')
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -56,10 +58,9 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'io.reactivex:rxjava:1.1.9'
     compile 'io.reactivex:rxandroid:1.2.1'
-    compile project(':refreshlibrary')
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile project(':vitamio')
     compile 'com.android.support:design:23.3.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'cn.jiguang:jpush:2.1.8'
+    compile 'com.android.support:support-v4:23.3.0'
 }
