@@ -1,26 +1,24 @@
 package com.android1604.mustsee.http;
 
-import com.android1604.mustsee.constant.Constant;
-
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Administrator on 2016/9/6.
- * 单例模式创建HttpService
+ * Created by my on 2016/9/6.
  */
 public class HttpUtils {
-    private static HttpService httpService;
-    public static HttpService create(){
-        if(httpService == null){
+    private static HttpService mHttpService;
+    public static final String BASE_URL = "http://api2.souyue.mobi";
+    public static HttpService getHttpService(){
+        if(mHttpService == null){
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constant.BASE_URL)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
-            httpService = retrofit.create(HttpService.class);
+            mHttpService = retrofit.create(HttpService.class);
         }
-        return httpService;
+        return mHttpService;
     }
 }
