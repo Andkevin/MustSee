@@ -1,4 +1,4 @@
-package com.android1604.mustsee;
+package com.android1604.mustsee.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
+import com.android1604.mustsee.BaseActivity;
+import com.android1604.mustsee.R;
 import com.android1604.mustsee.fragment.ExploreFragment;
 import com.android1604.mustsee.fragment.InformationFragment;
 import com.android1604.mustsee.fragment.MineFragment;
 
 /**
- * 程序入口
+ * 主页
  */
 public class MainActivity extends BaseActivity {
 
