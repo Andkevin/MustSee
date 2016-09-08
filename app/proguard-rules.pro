@@ -57,7 +57,10 @@ public static final int *;
 -dontwarn cn.jpush.**
 -keep class cn.jpush.** { *; }
 #JPush混淆规则end
-
+#baidu混淆规则start
+-dontwarn com.baidu.**
+-keep class com.baidu.**{*;}
+#baidu混淆规则end
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);

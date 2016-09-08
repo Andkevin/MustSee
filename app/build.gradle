@@ -30,6 +30,12 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     productFlavors {
         xiaomi {
             manifestPlaceholders = [CHANNEL: "xiaomi"];
@@ -51,6 +57,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':refreshlibrary')
     compile project(':vitamio')
+    compile files('libs/MobCommons-2016.0830.1940.jar')
+    compile files('libs/MobTools-2016.0830.1940.jar')
+    compile files('libs/ShareSDK-Core-2.7.7.jar')
+    compile files('libs/ShareSDK-QQ-2.7.7.jar')
+    compile files('libs/ShareSDK-QZone-2.7.7.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-2.7.7.jar')
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -63,14 +79,5 @@ dependencies {
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'cn.jiguang:jpush:2.1.8'
     compile 'com.android.support:support-v4:23.3.0'
-    compile files('libs/MobCommons-2016.0830.1940.jar')
-    compile files('libs/MobTools-2016.0830.1940.jar')
-    compile files('libs/ShareSDK-Core-2.7.7.jar')
-    compile files('libs/ShareSDK-QQ-2.7.7.jar')
-    compile files('libs/ShareSDK-QZone-2.7.7.jar')
-    compile files('libs/ShareSDK-SinaWeibo-2.7.7.jar')
-    compile files('libs/ShareSDK-Wechat-2.7.7.jar')
-    compile files('libs/ShareSDK-Wechat-Core-2.7.7.jar')
-    compile files('libs/ShareSDK-Wechat-Favorite-2.7.7.jar')
-    compile files('libs/ShareSDK-Wechat-Moments-2.7.7.jar')
+    compile files('libs/BaiduLBS_Android.jar')
 }

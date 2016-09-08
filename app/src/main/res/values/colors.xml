@@ -3,7 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="selectedTextColor">#FE4A4B</color>
+    <color name="nomalTextColor">#4D4D4D</color>
     <color name="colorWrite">#FFFFFF</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorGray">#C0C0C0</color>
