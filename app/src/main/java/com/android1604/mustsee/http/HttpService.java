@@ -10,6 +10,9 @@ import rx.Observable;
  */
 public interface HttpService {
 
+    /**
+     * 请求'探索'主页数据
+     */
     @GET("/headline/webdata/love.explore.groovy")
     Observable<ExploreInfoBean> queryExploreInfo();
 
