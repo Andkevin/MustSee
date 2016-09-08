@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWrite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热门订阅"
+            android:textSize="15sp"
+            android:textColor="@color/colorRed"/>
+
+        <TextView
+            android:id="@+id/fragment_explore_list_hot_item_change_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="换一批"
+            android:textSize="15sp"
+            android:textColor="@color/colorGray"/>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/fragment_explore_list_hot_item_gridview_gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:padding="20dp"
+        android:verticalSpacing="10dp"
+        android:columnWidth="200dp"/>
+
+</LinearLayout>

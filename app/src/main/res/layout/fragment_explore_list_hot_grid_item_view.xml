@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWrite"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/fragment_explore_list_hot_grid_item_img_iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/fragment_explore_list_hot_grid_item_keyword_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关键字"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="3dp"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/fragment_explore_list_hot_grid_item_readcount_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGray"
+        android:layout_marginTop="5dp"
+        android:text="订阅数量"
+        android:textSize="13sp" />
+
+</LinearLayout>

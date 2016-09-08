@@ -2,19 +2,19 @@ package com.android1604.mustsee.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import com.android1604.mustsee.R;
+import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.presenter.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
@@ -29,9 +29,11 @@ public class ExploreFragment extends Fragment implements IExploreView{
     private  LinearLayout mIndicView;
     private int mIndicCount;
     private ViewPager mListViewPager;
-    private List<ExploreInfoBean> exploreInfoBeanList = new ArrayList<>();
+    private ExploreInfoBean mExploreInfoBean;
     private boolean netReqFinish = false;
     private ExplorePresenterImpl mExplorePresenter;
+    private ExploreListAdapter mExploreListAdapter;
+    public static final int LV_REQ_REFRESH = 1;
 
     public static ExploreFragment newInstance() {
         ExploreFragment fragment = new ExploreFragment();
@@ -56,14 +58,12 @@ public class ExploreFragment extends Fragment implements IExploreView{
     private void initContentView(View view) {
         mLv = (PullToRefreshListView) view.findViewById(R.id.fragment_explore_list_view_lv);
         mLv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        listRefreshCtrl();          //ExpandListView下拉刷新的监听事件
-        initListHeader();           //初始化ExpandListView的头部
-
-
+        listRefreshCtrl();          //ListView下拉刷新的监听事件
+//      initListHeader();           //初始化ExpandListView的头部
     }
 
     /**
-     * 初始化ExpandListView的头部
+     * 初始化ListView的头部
      */
     private void initListHeader() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_header_view,null);
@@ -72,8 +72,6 @@ public class ExploreFragment extends Fragment implements IExploreView{
         mIndicCount = mIndicView.getChildCount();
         indicatorCtl(0);
         mListViewPager = (ViewPager) view.findViewById(R.id.explore_list_header_vp);
-
-
     }
 
     /**
@@ -82,7 +80,12 @@ public class ExploreFragment extends Fragment implements IExploreView{
      */
     @Override
     public void applyExploreInfo(ExploreInfoBean exploreInfoBean) {
-
+        mExploreInfoBean = exploreInfoBean;
+        if(mExploreListAdapter == null){
+            mExploreListAdapter = new ExploreListAdapter(mContext, mExploreInfoBean.getBody());
+            mLv.setAdapter(mExploreListAdapter);
+        }
+        mExploreListAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -97,13 +100,16 @@ public class ExploreFragment extends Fragment implements IExploreView{
     }
 
     /**
-     * ExpandListView刷新的监听事件
+     * ListView刷新的监听事件
      */
     private void listRefreshCtrl() {
         mLv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                refreshView.getLoadingLayoutProxy().setRefreshingLabel("加载中...");
+                refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
+                mHandler.sendEmptyMessage(LV_REQ_REFRESH);
             }
 
             @Override
@@ -113,37 +119,16 @@ public class ExploreFragment extends Fragment implements IExploreView{
         });
     }
 
-    /**
-     * ListView的适配器
-     */
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case LV_REQ_REFRESH:
+                    mLv.onRefreshComplete();
+                    //更新适配器
+                    break;
+            }
+        }
+    };
 
-
-    /**
-     * ListView中viewpager的适配器定义
-     */
-    class ListPagerAdapter extends PagerAdapter{
-
-        @Override
-        public int getCount() {
-            return Integer.MAX_VALUE;
-        }
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            ImageView imageView = new ImageView(mContext);
-//            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//            if(mAdverDatas != null){
-//                ImageLoader.init(mContext).loadImage(mAdverDatas.get(position%5), imageView);
-//            }
-//            container.addView(imageView);
-            return imageView;
-        }
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    }
 }
