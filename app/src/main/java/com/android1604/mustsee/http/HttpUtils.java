@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by my on 2016/9/6.
+ *
  */
 public class HttpUtils {
     private static HttpService mHttpService;

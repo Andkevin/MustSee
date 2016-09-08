@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.umeng.analytics.MobclickAgent;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by zengzhen on 2016/9/5.
  *
@@ -21,6 +23,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onResume();
         //友盟统计
         MobclickAgent.onResume(this);
+        //JPush
+        JPushInterface.onResume(this);
     }
 
     @Override
@@ -28,5 +32,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onPause();
         //友盟统计
         MobclickAgent.onPause(this);
+        //JPush
+        JPushInterface.onPause(this);
     }
 }

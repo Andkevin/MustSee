@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.android1604.mustsee.presenter.IStartPresenter;
-import com.android1604.mustsee.presenter.impl.StartPresenter;
+import com.android1604.mustsee.presenter.impl.StartPresenterImpl;
 import com.android1604.mustsee.ui.MainActivity;
 import com.android1604.mustsee.view.IStartView;
 import com.baidu.location.BDLocation;
@@ -41,7 +41,7 @@ public class StartActivity extends BaseActivity implements IStartView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        startPresenter = new StartPresenter(this);
+        startPresenter = new StartPresenterImpl(this);
         mImageView = (ImageView) findViewById(R.id.start_image_iv);
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
