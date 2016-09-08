@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp">
+
+        <io.vov.vitamio.widget.VideoView
+            android:id="@+id/item_video_vv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <ImageView
+            android:id="@+id/item_video_image_iv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/information_list_video_item_shape" />
+
+        <TextView
+            android:id="@+id/item_video_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/item_video_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp" />
+
+        <ImageView
+            android:id="@+id/item_video_play_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/biz_video_play" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/item_video_praise_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/video_before_praise_item"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/item_video_comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/item_video_praise_tv"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/video_comment_item"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/item_video_share_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/video_share_item" />
+
+        <ImageView
+            android:id="@+id/item_video_collect_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/item_video_share_iv"
+            android:src="@drawable/video_before_collect_item" />
+    </RelativeLayout>
+
+</LinearLayout>

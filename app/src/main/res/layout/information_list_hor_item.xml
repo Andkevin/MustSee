@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/item_hor_image_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_small" />
+
+    <TextView
+        android:id="@+id/item_hor_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/item_hor_image_iv"
+        android:lines="2"
+        android:padding="10dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/item_hor_from_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_hor_title_tv"
+        android:padding="10dp"
+        android:textColor="#66000000" />
+
+    <TextView
+        android:id="@+id/item_hor_channel_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_hor_title_tv"
+        android:layout_alignRight="@id/item_hor_title_tv"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:textColor="#66000000" />
+
+</RelativeLayout>

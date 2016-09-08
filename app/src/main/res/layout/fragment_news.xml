@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     tools:context="com.android1604.mustsee.fragment.NewsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/information_list_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

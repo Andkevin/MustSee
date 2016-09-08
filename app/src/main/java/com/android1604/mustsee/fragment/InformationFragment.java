@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.presenter.IInformationPresenter;
-import com.android1604.mustsee.presenter.impl.InformationPresenter;
+import com.android1604.mustsee.presenter.impl.InformationPresenterImpl;
 import com.android1604.mustsee.view.IInformationView;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class InformationFragment extends Fragment implements IInformationView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        informationPresenter = new InformationPresenter(this);
+        informationPresenter = new InformationPresenterImpl(this);
     }
 
     @Override
