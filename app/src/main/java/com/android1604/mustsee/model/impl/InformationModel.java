@@ -17,7 +17,7 @@ public class InformationModel implements IInformationModel {
 
     @Override
     public void getTabTitles(final IInformationPresenter.TabTitlesCallBack customCallBack) {
-        HttpUtils.create().getTabTitles()
+        HttpUtils.getHttpService().getTabTitles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<TabTitlesBean>() {

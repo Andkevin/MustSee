@@ -17,7 +17,7 @@ public class StartModel implements IStartModel{
 
     @Override
     public void getStartImage(final IStartPresenter.StartImageCallBack callBack) {
-        HttpUtils.create().getStartImage()
+        HttpUtils.getHttpService().getStartImage()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<StartBean>() {
