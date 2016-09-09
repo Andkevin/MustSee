@@ -105,7 +105,7 @@
         //key:开发者申请的key
         <!-- baidu end -->
         <activity android:name=".StartActivity"/>
-        <activity android:name=".ui.ExploreHotSubActivity"/>
+        <activity android:name=".ui.ExploreSubTitleActivity"/>
     </application>
 
 </manifest>

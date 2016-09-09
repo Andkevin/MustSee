@@ -1,19 +1,16 @@
 package com.android1604.mustsee.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android1604.mustsee.BaseActivity;
 import com.android1604.mustsee.R;
-import com.android1604.mustsee.adapter.ExploreListAdapter;
-import com.android1604.mustsee.adapter.HotSubListAdapter;
+import com.android1604.mustsee.adapter.ExploreTitleSubscribeAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.presenter.ExplorePresenterImpl;
@@ -23,14 +20,14 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 /**
  * Created by my on 2016/9/8.
  */
-public class ExploreHotSubActivity extends BaseActivity implements IExploreView, View.OnClickListener{
+public class ExploreSubTitleActivity extends BaseActivity implements IExploreView, View.OnClickListener{
     private ExplorePresenterImpl mExplorePresenter;
     private TextView mSubscribeTxt;
     private PullToRefreshListView mRefreshLv;
     private String mKeyword;
     private ImageView mBackImgView;
     private TextView mKeywordTxt;
-    private HotSubListAdapter mHotSubListAdapter;
+    private ExploreTitleSubscribeAdapter mExploreTitleSubscribeAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +36,7 @@ public class ExploreHotSubActivity extends BaseActivity implements IExploreView,
         mExplorePresenter = new ExplorePresenterImpl(this);
         mKeyword = getIntent().getExtras().getString("keyword");
         if(mKeyword == null){
+            Toast.makeText(this, "关键字为空!", Toast.LENGTH_SHORT).show();
             return;
         }
         initView();
@@ -58,11 +56,11 @@ public class ExploreHotSubActivity extends BaseActivity implements IExploreView,
 
     @Override
     public void applyHotSubList(ExploreSubscribeBean exploreSubscribeBean) {
-        if(mHotSubListAdapter == null){
-            mHotSubListAdapter = new HotSubListAdapter(this,exploreSubscribeBean);
-            mRefreshLv.setAdapter(mHotSubListAdapter);
+        if(mExploreTitleSubscribeAdapter == null){
+            mExploreTitleSubscribeAdapter = new ExploreTitleSubscribeAdapter(this,exploreSubscribeBean);
+            mRefreshLv.setAdapter(mExploreTitleSubscribeAdapter);
         }
-        mHotSubListAdapter.notifyDataSetChanged();
+        mExploreTitleSubscribeAdapter.notifyDataSetChanged();
     }
 
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {

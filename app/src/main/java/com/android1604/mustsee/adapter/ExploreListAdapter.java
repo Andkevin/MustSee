@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
-import com.android1604.mustsee.ui.ExploreHotSubActivity;
+import com.android1604.mustsee.ui.ExploreSubTitleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class ExploreListAdapter extends BaseAdapter {
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, ExploreHotSubActivity.class);
+                Intent intent = new Intent(mContext, ExploreSubTitleActivity.class);
                 intent.putExtra("keyword",bodyBean.getHotSubscribeList().get(position).getKeyword());
                 mContext.startActivity(intent);
             }
