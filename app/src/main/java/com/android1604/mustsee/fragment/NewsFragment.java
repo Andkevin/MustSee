@@ -11,13 +11,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.presenter.INewsPresenter;
 import com.android1604.mustsee.presenter.impl.NewsPresenterImpl;
 import com.android1604.mustsee.view.INewsView;
-import com.handmark.pulltorefresh.library.PullToRefreshExpandableListView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.List;
 public class NewsFragment extends Fragment implements INewsView{
 
     private Context mContext;
-    private PullToRefreshExpandableListView mListView;
+    private PullToRefreshListView mListView;
     private INewsPresenter newsPresenter;
     private int indexId;
     private int lastId;
@@ -61,7 +60,7 @@ public class NewsFragment extends Fragment implements INewsView{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
-        mListView = (PullToRefreshExpandableListView) view.findViewById(R.id.information_list_lv);
+        mListView = (PullToRefreshListView) view.findViewById(R.id.information_list_lv);
         return view;
     }
 

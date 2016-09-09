@@ -21,7 +21,7 @@ public class ListViewUtils {
         }
         ViewGroup.LayoutParams layoutParams = listView.getLayoutParams();
 //        layoutParams.height = totalHeight + 100 + (listView.getDividerHeight()*(adapter.getCount()-1));
-        layoutParams.height = totalHeight - 600;
+        layoutParams.height = totalHeight - 700;
         if(listView instanceof ListView){
             layoutParams.height = totalHeight + 300;
         }

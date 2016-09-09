@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/colorWrite"
+    android:background="@color/colorWhite"
     android:padding="10dp">
 
     <TextView
@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="标题"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp" />
 
     <LinearLayout

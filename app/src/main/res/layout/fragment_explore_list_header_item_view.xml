@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/explore_list_header_item_img_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/explore_list_header_item_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="标题"
+        android:textSize="13sp"
+        android:gravity="bottom"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:background="@drawable/explore_list_banner_gradient"
+        android:textColor="@color/colorWhite"/>
+
+</RelativeLayout>
