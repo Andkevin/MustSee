@@ -1,5 +1,7 @@
 package com.android1604.mustsee.presenter.impl;
 
+import android.util.Log;
+
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.model.INewsModel;
 import com.android1604.mustsee.model.impl.NewsModelImpl;
@@ -22,7 +24,7 @@ public class NewsPresenterImpl implements INewsPresenter,INewsPresenter.NewsCall
     }
 
     @Override
-    public void getNewsList(String category, String keyword, String srpId, int indexId, int lastId) {
+    public void getNewsList(String category, String keyword, String srpId, String indexId, String lastId) {
         newsModel.getNewsList(category,keyword,srpId,indexId,lastId,this);
     }
 

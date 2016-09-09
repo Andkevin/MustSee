@@ -41,6 +41,6 @@
         android:text="G20领导人"
         android:textSize="18sp"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/colorWrite" />
+        android:textColor="@color/colorWhite" />
 
 </RelativeLayout>

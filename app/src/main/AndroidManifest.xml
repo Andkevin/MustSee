@@ -104,7 +104,8 @@
             android:value="4BmUpwg3wGyDtaIypCongiZ0N1lqiu7F" />
         //key:开发者申请的key
         <!-- baidu end -->
-        <activity android:name=".StartActivity"/>
+        <activity android:name=".StartActivity" />
+        <activity android:name=".ui.ChannelActivity"></activity>
     </application>
 
 </manifest>

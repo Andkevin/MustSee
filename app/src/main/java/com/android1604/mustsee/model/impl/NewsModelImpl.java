@@ -1,5 +1,7 @@
 package com.android1604.mustsee.model.impl;
 
+import android.util.Log;
+
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.http.HttpUtils;
 import com.android1604.mustsee.model.INewsModel;
@@ -15,8 +17,9 @@ import rx.schedulers.Schedulers;
  */
 public class NewsModelImpl implements INewsModel{
 
+
     @Override
-    public void getNewsList(String category, String keyword, String srpId, int indexId, int lastId, final INewsPresenter.NewsCallBack newsCallBack) {
+    public void getNewsList(String category, String keyword, String srpId, String indexId, String lastId, final INewsPresenter.NewsCallBack newsCallBack) {
         HttpUtils.getHttpService().getNewsList(category,keyword,srpId,indexId,lastId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

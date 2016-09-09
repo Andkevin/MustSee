@@ -10,5 +10,5 @@ public interface INewsModel {
     /**
      * 网络请求新闻列表
      */
-    void getNewsList(String category,String keyword,String srpId,int indexId,int lastId,INewsPresenter.NewsCallBack newsCallBack);
+    void getNewsList(String category,String keyword,String srpId,String indexId,String lastId,INewsPresenter.NewsCallBack newsCallBack);
 }

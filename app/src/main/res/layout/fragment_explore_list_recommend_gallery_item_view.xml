@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWrite"
+    android:background="@color/colorWhite"
     android:padding="5dp">
 
     <ImageView
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="关键字"
             android:textSize="20sp"
-            android:textColor="@color/colorWrite"/>
+            android:textColor="@color/colorWhite"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -38,14 +38,14 @@
                 android:layout_height="wrap_content"
                 android:text="标题"
                 android:textSize="15sp"
-                android:textColor="@color/colorWrite"/>
+                android:textColor="@color/colorWhite"/>
 
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="30dp"
                 android:text="查看"
                 android:textSize="18sp"
-                android:textColor="@color/colorWrite"
+                android:textColor="@color/colorWhite"
                 android:background="@color/colorRed"
                 android:gravity="center"
                 android:layout_alignParentRight="true" />
