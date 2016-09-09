@@ -1,6 +1,7 @@
 package com.android1604.mustsee.http;
 
 
+import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.bean.StartBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
@@ -33,6 +34,9 @@ public interface HttpService {
      */
     @GET("/headline/webdata/love.explore.groovy")
     Observable<ExploreInfoBean> queryExploreInfo();
+
+    @POST("/headline/search/search.content.groovy")
+    Observable<ExploreSubscribeBean> querySubscribeList(@Query("keyword") String keyword);
 
 
 }

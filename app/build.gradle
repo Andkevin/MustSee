@@ -80,4 +80,5 @@ dependencies {
     compile 'cn.jiguang:jpush:2.1.8'
     compile 'com.android.support:support-v4:23.3.0'
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }

@@ -59,7 +59,7 @@ public class ExploreInfoBean {
          * docType : 1
          * srpId : 6632a61e53929f8dd5931c36a7016c74
          * imageUrl : http://souyue-xqq.b0.upaiyun.com/newssource/1609/1r1e2fop68wv14731403910941-20160906133951_200_200.jpg
-         * countSubscribe : 13889
+         * countSubscribe : 12584
          * title :
          * desc :
          * keyword : 郭德纲
@@ -72,7 +72,7 @@ public class ExploreInfoBean {
          * docType : 1
          * srpId : 4cc914a8f16f30d66a289ce65d6e0782
          * imageUrl : http://souyue-xqq.b0.upaiyun.com/newssource/1609/athk7z9csgct14731410151714-20160906135015_460_300.jpg
-         * countSubscribe : 10914
+         * countSubscribe : 12701
          * title : 分享历史老照片 探索神秘事物！
          * desc :
          * keyword : 大嘴侃历史
@@ -83,13 +83,14 @@ public class ExploreInfoBean {
          * invokeType : 95
          * docId :
          * docType : 1
+         * footView : {"commentCount":-1,"ctime":0,"downCount":-1,"footType":1,"isDown":0,"source":"中国青年网 ","upCount":-1}
          * srpId : c34c2cde7e067f0bf45c191049ad40de
          * imageUrl : http://edit.zhongsou.com/Img/getSrpImg?srpId=c34c2cde7e067f0bf45c191049ad40de
-         * countSubscribe : 22145
-         * title : 黄海波复出拍戏搭档小宋佳和张馨予现场道具复杂
-         * desc :
-         * source : 中国青年网
+         * countSubscribe : 15405
+         * id : 100021472522820000
          * image : ["http://souyue-image.b0.upaiyun.com/newspic/list/8c/c4/4208cc4055a82042708_android.jpg!android"]
+         * title :
+         * desc :
          * keyword : 黄海波
          * viewType : 95
          */
@@ -97,14 +98,14 @@ public class ExploreInfoBean {
         private List<NewFoundListBean> newFoundList;
         /**
          * invokeType : 10
-         * docId : http://www.yidianzixun.com/home?page=article&id=0ENHMNVE&up=1
+         * docId : http://dajia.qq.com/original/category/njs160907.html
          * docType : 1
-         * srpId : eef7b484b0693ea845018b8eb4857fe9
-         * imageUrl : http://souyue-xqq.b0.upaiyun.com/newssource/1609/ce0sjgmkvsfc14732127168018-20160907094516_640_330.jpg
-         * countSubscribe : 18441
-         * title : 今日白露，咱们应该了解这些知识
+         * srpId : 6632a61e53929f8dd5931c36a7016c74
+         * imageUrl : http://souyue-xqq.b0.upaiyun.com/newssource/1609/ewx9lzv92lnz14733060744104-20160908114114_640_330.jpg
+         * countSubscribe : 21366
+         * title : 传统相声界的师父，真不是郭德纲那样的
          * desc :
-         * keyword : 白露
+         * keyword : 郭德纲
          */
 
         private List<RollingImagesListBean> rollingImagesList;
@@ -313,12 +314,23 @@ public class ExploreInfoBean {
             private int invokeType;
             private String docId;
             private int docType;
+            /**
+             * commentCount : -1
+             * ctime : 0
+             * downCount : -1
+             * footType : 1
+             * isDown : 0
+             * source : 中国青年网
+             * upCount : -1
+             */
+
+            private FootViewBean footView;
             private String srpId;
             private String imageUrl;
             private int countSubscribe;
+            private long id;
             private String title;
             private String desc;
-            private String source;
             private String keyword;
             private int viewType;
             private List<String> image;
@@ -347,6 +359,14 @@ public class ExploreInfoBean {
                 this.docType = docType;
             }
 
+            public FootViewBean getFootView() {
+                return footView;
+            }
+
+            public void setFootView(FootViewBean footView) {
+                this.footView = footView;
+            }
+
             public String getSrpId() {
                 return srpId;
             }
@@ -371,6 +391,14 @@ public class ExploreInfoBean {
                 this.countSubscribe = countSubscribe;
             }
 
+            public long getId() {
+                return id;
+            }
+
+            public void setId(long id) {
+                this.id = id;
+            }
+
             public String getTitle() {
                 return title;
             }
@@ -385,14 +413,6 @@ public class ExploreInfoBean {
 
             public void setDesc(String desc) {
                 this.desc = desc;
-            }
-
-            public String getSource() {
-                return source;
-            }
-
-            public void setSource(String source) {
-                this.source = source;
             }
 
             public String getKeyword() {
@@ -417,6 +437,72 @@ public class ExploreInfoBean {
 
             public void setImage(List<String> image) {
                 this.image = image;
+            }
+
+            public static class FootViewBean {
+                private int commentCount;
+                private int ctime;
+                private int downCount;
+                private int footType;
+                private int isDown;
+                private String source;
+                private int upCount;
+
+                public int getCommentCount() {
+                    return commentCount;
+                }
+
+                public void setCommentCount(int commentCount) {
+                    this.commentCount = commentCount;
+                }
+
+                public int getCtime() {
+                    return ctime;
+                }
+
+                public void setCtime(int ctime) {
+                    this.ctime = ctime;
+                }
+
+                public int getDownCount() {
+                    return downCount;
+                }
+
+                public void setDownCount(int downCount) {
+                    this.downCount = downCount;
+                }
+
+                public int getFootType() {
+                    return footType;
+                }
+
+                public void setFootType(int footType) {
+                    this.footType = footType;
+                }
+
+                public int getIsDown() {
+                    return isDown;
+                }
+
+                public void setIsDown(int isDown) {
+                    this.isDown = isDown;
+                }
+
+                public String getSource() {
+                    return source;
+                }
+
+                public void setSource(String source) {
+                    this.source = source;
+                }
+
+                public int getUpCount() {
+                    return upCount;
+                }
+
+                public void setUpCount(int upCount) {
+                    this.upCount = upCount;
+                }
             }
         }
 

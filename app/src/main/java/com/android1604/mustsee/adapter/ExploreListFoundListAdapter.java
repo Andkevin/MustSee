@@ -77,7 +77,7 @@ public class ExploreListFoundListAdapter extends BaseAdapter {
             TextView readCountTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type95_subcount_tv);
             ImageView imgView = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type95_iv);
             keywordTxt.setText(foundObj.getKeyword());
-            readCountTxt.setText(String.valueOf(foundObj.getCountSubscribe()));
+            readCountTxt.setText(String.valueOf(foundObj.getCountSubscribe())+"人已订阅");
             Picasso.with(mContext).load(foundObj.getImageUrl()).into(imgView);
         }
         if(viewType == 1 || viewType == 2){
@@ -86,7 +86,7 @@ public class ExploreListFoundListAdapter extends BaseAdapter {
             TextView sourceTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_source_tv);
             ImageView imgView = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type10_1_iv);
             titleTxt.setText(foundObj.getTitle());
-            sourceTxt.setText(foundObj.getSource());
+            sourceTxt.setText(foundObj.getFootView().getSource());
             if(viewType == 1){
                 imgView.setVisibility(View.GONE);
             }else {
@@ -102,7 +102,7 @@ public class ExploreListFoundListAdapter extends BaseAdapter {
             ImageView img2View = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type10_3_iv2);
             ImageView img3View = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type10_3_iv3);
             titleTxt.setText(foundObj.getTitle());
-            sourceTxt.setText(foundObj.getSource());
+            sourceTxt.setText(foundObj.getFootView().getSource());
             Picasso.with(mContext).load(foundObj.getImage().get(0)).into(img1View);
             Picasso.with(mContext).load(foundObj.getImage().get(1)).into(img2View);
             Picasso.with(mContext).load(foundObj.getImage().get(2)).into(img3View);

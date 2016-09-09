@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,9 +55,8 @@ public class ExploreListHotGridAdapter extends BaseAdapter{
         myViewHolder.imgView.setImageResource(R.mipmap.ic_launcher);
         ExploreInfoBean.BodyBean.HotSubscribeListBean hotSubscribeObj = hotSubscribeList.get(position);
         if(hotSubscribeObj != null){
-            myViewHolder.titleTxt.setText(hotSubscribeObj.getTitle());
-            Log.d("HotGridAdapter","============="+hotSubscribeObj.getTitle());
-            myViewHolder.countTxt.setText(String.valueOf(hotSubscribeObj.getCountSubscribe()));
+            myViewHolder.titleTxt.setText(hotSubscribeObj.getKeyword());
+            myViewHolder.countTxt.setText(String.valueOf(hotSubscribeObj.getCountSubscribe())+"人已订阅");
             Picasso.with(mContext).load(hotSubscribeObj.getImageUrl()).into(myViewHolder.imgView);
         }
         return convertView;

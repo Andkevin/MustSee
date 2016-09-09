@@ -1,6 +1,7 @@
 package com.android1604.mustsee.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
+import com.android1604.mustsee.ui.ExploreHotSubActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +85,9 @@ public class ExploreListAdapter extends BaseAdapter {
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TO-DO
+                Intent intent = new Intent(mContext, ExploreHotSubActivity.class);
+                intent.putExtra("keyword",bodyBean.getHotSubscribeList().get(position).getKeyword());
+                mContext.startActivity(intent);
             }
         });
     }
