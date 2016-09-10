@@ -19,11 +19,11 @@ import java.util.List;
 /**
  * Created by my on 2016/9/7.
  */
-public class ExploreTitleSubscribeAdapter extends BaseAdapter {
+public class ExploreNewsSubscribeAdapter extends BaseAdapter {
     private Context mContext;
     private List<ExploreSubscribeBean.BodyBean.NewsListBean> newsList = new ArrayList<>();
 
-    public ExploreTitleSubscribeAdapter(Context mContext, ExploreSubscribeBean exploreSubscribeBean) {
+    public ExploreNewsSubscribeAdapter(Context mContext, ExploreSubscribeBean exploreSubscribeBean) {
         this.mContext = mContext;
         this.newsList.addAll(exploreSubscribeBean.getBody().getNewsList());
     }

@@ -1,6 +1,8 @@
 package com.android1604.mustsee.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +21,8 @@ import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
+import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.http.HttpUtils;
 import com.android1604.mustsee.presenter.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -43,6 +47,11 @@ public class ExploreFragment extends Fragment implements IExploreView{
     private ExploreListAdapter mExploreListAdapter;
     public static final int LV_REQ_REFRESH = 1;
     private ConvenientBanner mBanner;
+    private LinearLayout mNetOffView;
+    private LinearLayout mPageLoadingView;
+    private ImageView mLoadAnimImg;
+    public static final int ANIM_STOP = 0;
+    private AnimationDrawable mAnimation;
 
     public static ExploreFragment newInstance() {
         ExploreFragment fragment = new ExploreFragment();
@@ -54,30 +63,24 @@ public class ExploreFragment extends Fragment implements IExploreView{
         super.onCreate(savedInstanceState);
         mContext = getContext();
         mExplorePresenter = new ExplorePresenterImpl(this);
-        mExplorePresenter.queryExploreList();
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if(mBanner != null){
-            mBanner.setCanLoop(true);
-            mBanner.setScrollDuration(3000);
-            mBanner.startTurning(4000);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(mBanner != null){
-            mBanner.stopTurning();
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
+//        mNetOffView = (LinearLayout) view.findViewById(R.id.fragment_explore_network_off_layout);
+        mPageLoadingView = (LinearLayout) view.findViewById(R.id.fragment_explore_loading_page_layout);
+//        mPageLoadingView.getChildAt(0);
+        mLoadAnimImg = (ImageView)mPageLoadingView.findViewById(R.id.fragment_explore_loading_img_iv);
+//        if(!HttpUtils.isNetworkAvailable(mContext)){
+//            return view;
+//        }
+//        mNetOffView.setVisibility(View.GONE);
+        mPageLoadingView.setVisibility(View.VISIBLE);
+        mLoadAnimImg.setBackgroundResource(R.drawable.loading_animation);
+        mAnimation = (AnimationDrawable) mLoadAnimImg.getBackground();
+        mExplorePresenter.queryExploreList();
         initContentView(view);
         return view;
     }
@@ -86,6 +89,14 @@ public class ExploreFragment extends Fragment implements IExploreView{
         mLv = (PullToRefreshListView) view.findViewById(R.id.fragment_explore_list_view_lv);
         mLv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listRefreshCtrl();          //ListView下拉刷新的监听事件
+        mLoadAnimImg.post(new Runnable() {
+            @Override
+            public void run() {
+                if(mAnimation != null && !mAnimation.isRunning()){
+                    mAnimation.start();
+                }
+            }
+        });
     }
 
     /**
@@ -145,6 +156,8 @@ public class ExploreFragment extends Fragment implements IExploreView{
             mLv.setAdapter(mExploreListAdapter);
         }
         mExploreListAdapter.notifyDataSetChanged();
+        mPageLoadingView.setVisibility(View.GONE);
+        mHandler.sendEmptyMessage(ANIM_STOP);
     }
 
     /**
@@ -186,11 +199,32 @@ public class ExploreFragment extends Fragment implements IExploreView{
                     mLv.onRefreshComplete();
                     //更新适配器
                     break;
+                case ANIM_STOP:
+                    mAnimation.stop();
+                    break;
             }
         }
     };
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(mBanner != null){
+            mBanner.setCanLoop(true);
+            mBanner.setScrollDuration(3000);
+            mBanner.startTurning(4000);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(mBanner != null){
+            mBanner.stopTurning();
+        }
+    }
+
     //无需使用
     @Override
-    public void applyHotSubList(ExploreSubscribeBean exploreSubscribeBean) {}
+    public void applyNewsSubList(NewsBean newsBean) {}
 }

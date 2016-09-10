@@ -113,7 +113,7 @@ public class NewsBean {
         public static class NewsListBean {
             private String invokeType;
             private String viewType;
-            private int id;
+            private String id;
             private String title;
             private String imgRatio;
             private String bigImgUrl;
@@ -160,11 +160,11 @@ public class NewsBean {
                 this.viewType = viewType;
             }
 
-            public int getId() {
+            public String getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(String id) {
                 this.id = id;
             }
 

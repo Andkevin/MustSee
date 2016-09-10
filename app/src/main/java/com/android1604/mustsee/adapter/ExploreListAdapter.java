@@ -2,6 +2,7 @@ package com.android1604.mustsee.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
-import com.android1604.mustsee.ui.ExploreSubTitleActivity;
+import com.android1604.mustsee.ui.ExploreNewsSubActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class ExploreListAdapter extends BaseAdapter {
         GridView mGv = (GridView) view.findViewById(R.id.fragment_explore_list_hot_item_gridview_gv);
         final ExploreListHotGridAdapter gridAdapter = new ExploreListHotGridAdapter(mContext,curGridAdapterList);
         mGv.setAdapter(gridAdapter);
-        ListViewUtils.reMeasureHeightOnSubList(mGv);
+//        ListViewUtils.reMeasureHeightOnSubList(mGv);
         batchTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +86,7 @@ public class ExploreListAdapter extends BaseAdapter {
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, ExploreSubTitleActivity.class);
+                Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
                 intent.putExtra("keyword",bodyBean.getHotSubscribeList().get(position).getKeyword());
                 mContext.startActivity(intent);
             }
@@ -99,7 +100,9 @@ public class ExploreListAdapter extends BaseAdapter {
         mGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TO-DO
+                Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
+                intent.putExtra("keyword",bodyBean.getRecommentList().get(position).getKeyword());
+                mContext.startActivity(intent);
             }
         });
     }
@@ -108,11 +111,19 @@ public class ExploreListAdapter extends BaseAdapter {
         ListView mLv = (ListView) view.findViewById(R.id.fragment_explore_list_found_item_list_lv);
         ExploreListFoundListAdapter foundAdapter = new ExploreListFoundListAdapter(mContext, bodyBean.getNewFoundList());
         mLv.setAdapter(foundAdapter);
-        ListViewUtils.reMeasureHeightOnSubList(mLv);
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TO-DO
+                Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
+                int viewID = view.getId();
+                Log.d("ExploreListAdatper", "viewID================================="+viewID);
+                switch (viewID){
+                    case R.layout.fragment_explore_list_found_list_item_type95_view:
+                        Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
+                        intent.putExtra("keyword",bodyBean.getNewFoundList().get(position).getKeyword());
+                        mContext.startActivity(intent);
+                        break;
+                }
             }
         });
     }

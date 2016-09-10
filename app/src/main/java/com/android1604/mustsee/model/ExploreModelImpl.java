@@ -2,6 +2,7 @@ package com.android1604.mustsee.model;
 
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
+import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.http.HttpUtils;
 import com.android1604.mustsee.presenter.IExplorePresenter;
 import rx.android.schedulers.AndroidSchedulers;
@@ -25,13 +26,13 @@ public class ExploreModelImpl implements IExploreModel {
     }
 
     @Override
-    public void queryHotSubList(String keyword, final IExplorePresenter.HotSubListCallback hotSubListCallback) {
-        HttpUtils.getHttpService().querySubscribeList(keyword).subscribeOn(Schedulers.io())
+    public void queryNewsSubList(String keyword, final IExplorePresenter.NewsSubListCallback newsSubListCallback) {
+        HttpUtils.getHttpService().queryNewsSubList(keyword).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ExploreSubscribeBean>() {
+                .subscribe(new Action1<NewsBean>() {
                     @Override
-                    public void call(ExploreSubscribeBean exploreSubscribeBean) {
-                        hotSubListCallback.hotSubListOK(exploreSubscribeBean);
+                    public void call(NewsBean newsBean) {
+                        newsSubListCallback.newsSubListOK(newsBean);
                     }
                 });
     }

@@ -10,7 +10,7 @@ public interface INewsPresenter {
     /**
      * 请求新闻列表
      */
-    void getNewsList(String category,String keyword,String srpId,int indexId,int lastId);
+    void getNewsList(String category,String keyword,String srpId,String indexId,String lastId);
 
     interface NewsCallBack{
         void success(NewsBean newsBean);

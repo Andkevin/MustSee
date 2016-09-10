@@ -15,8 +15,9 @@
         android:textSize="15sp"
         android:textColor="@color/colorRed"/>
 
-    <ListView
+    <com.android1604.mustsee.ui.MyListView
         android:id="@+id/fragment_explore_list_found_item_list_lv"
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

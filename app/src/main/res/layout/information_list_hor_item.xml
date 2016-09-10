@@ -2,14 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     android:gravity="center">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorLightGray"/>
 
     <ImageView
         android:id="@+id/item_hor_image_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/small_picture_width"
+        android:layout_height="@dimen/small_picture_height"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/default_small" />
 
@@ -18,16 +27,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/item_hor_image_iv"
-        android:lines="2"
-        android:padding="10dp"
-        android:textSize="20sp" />
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/colorBlack"
+        android:maxLines="2"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/item_hor_from_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_hor_title_tv"
-        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="10sp"
         android:textColor="#66000000" />
 
     <TextView
@@ -36,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/item_hor_title_tv"
         android:layout_alignRight="@id/item_hor_title_tv"
-        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="10sp"
         android:visibility="gone"
         android:textColor="#66000000" />
 

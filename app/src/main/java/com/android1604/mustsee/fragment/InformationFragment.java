@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.presenter.IInformationPresenter;
@@ -23,13 +24,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InformationFragment extends Fragment implements IInformationView {
+public class InformationFragment extends Fragment implements IInformationView,View.OnClickListener {
 
     private IInformationPresenter informationPresenter;
     private TabLayout mTab;
     private List<String> titleList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
-    private ViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
 
     public static InformationFragment newInstance() {
@@ -47,7 +47,9 @@ public class InformationFragment extends Fragment implements IInformationView {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, container, false);
         mTab = (TabLayout) view.findViewById(R.id.information_tab_layout);
-        mViewPager = (ViewPager) view.findViewById(R.id.information_vp);
+        ViewPager mViewPager = (ViewPager) view.findViewById(R.id.information_vp);
+        ImageView addChannel = (ImageView) view.findViewById(R.id.information_add_iv);
+        addChannel.setOnClickListener(this);
         informationPresenter.getTabTiles();
         mAdapter = new ViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mAdapter);
@@ -62,6 +64,11 @@ public class InformationFragment extends Fragment implements IInformationView {
         titleList.add(title);
         fragmentList.add(NewsFragment.newInstance(bundle));
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        //TODO
     }
 
 

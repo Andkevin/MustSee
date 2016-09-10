@@ -2,6 +2,7 @@ package com.android1604.mustsee.presenter;
 
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
+import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.model.ExploreModelImpl;
 import com.android1604.mustsee.model.IExploreModel;
 import com.android1604.mustsee.view.IExploreView;
@@ -9,7 +10,7 @@ import com.android1604.mustsee.view.IExploreView;
 /**
  * Created by my on 2016/9/6.
  */
-public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresenter.ExploreInfoCallback,IExplorePresenter.HotSubListCallback{
+public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresenter.ExploreInfoCallback,IExplorePresenter.NewsSubListCallback{
 
     IExploreModel mExploreModel;
     IExploreView mExploreView;
@@ -28,11 +29,11 @@ public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresente
     }
 
     /**
-     * 查询探索界面热门订阅列表信息
+     * 查询资讯订阅列表信息
      */
     @Override
-    public void queryHotSubList(String keyword) {
-        mExploreModel.queryHotSubList(keyword,this);
+    public void queryNewsSubList(String keyword) {
+        mExploreModel.queryNewsSubList(keyword,this);
     }
 
     /**
@@ -44,10 +45,13 @@ public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresente
     }
 
     /**
-     * 获取到探索界面热门订阅列表信息后的接口回调行为
+     * 获取到资讯订阅列表信息后的接口回调行为
      */
     @Override
-    public void hotSubListOK(ExploreSubscribeBean exploreSubscribeBean) {
-        mExploreView.applyHotSubList(exploreSubscribeBean);
+    public void newsSubListOK(NewsBean newsBean) {
+        mExploreView.applyNewsSubList(newsBean);
     }
+
+
+
 }
