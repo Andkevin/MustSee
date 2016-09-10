@@ -19,7 +19,7 @@ import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
-import com.android1604.mustsee.presenter.ExplorePresenterImpl;
+import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -28,8 +28,6 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class ExploreFragment extends Fragment implements IExploreView{
     private Context mContext;

@@ -2,6 +2,7 @@ package com.android1604.mustsee.presenter.impl;
 
 import android.os.Bundle;
 
+import com.android1604.mustsee.bean.SearchContentBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
 import com.android1604.mustsee.model.IInformationModel;
 import com.android1604.mustsee.model.impl.InformationModelImpl;
@@ -26,6 +27,11 @@ public class InformationPresenterImpl implements IInformationPresenter,IInformat
     @Override
     public void getTabTiles() {
         informationModel.getTabTitles(this);
+    }
+
+    @Override
+    public void getSearchContent() {
+        informationModel.getSearchContent(this);
     }
 
     @Override
@@ -57,6 +63,17 @@ public class InformationPresenterImpl implements IInformationPresenter,IInformat
                 }
                 informationView.refreshTabLayout(title,bundle);
             }
+        }
+    }
+
+    @Override
+    public void contentSuccess(SearchContentBean searchContentBean) {
+        String content = null;
+        if(searchContentBean != null){
+            content = searchContentBean.getBody().getContent();
+        }
+        if(content != null){
+            informationView.getSearchContent("大家都在搜:"+content);
         }
     }
 }

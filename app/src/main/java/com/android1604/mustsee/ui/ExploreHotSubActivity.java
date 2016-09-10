@@ -1,10 +1,7 @@
 package com.android1604.mustsee.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -12,11 +9,10 @@ import android.widget.TextView;
 
 import com.android1604.mustsee.BaseActivity;
 import com.android1604.mustsee.R;
-import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.adapter.HotSubListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
-import com.android1604.mustsee.presenter.ExplorePresenterImpl;
+import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
