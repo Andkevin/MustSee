@@ -1,6 +1,8 @@
 package com.android1604.mustsee.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,10 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.presenter.IInformationPresenter;
 import com.android1604.mustsee.presenter.impl.InformationPresenterImpl;
+import com.android1604.mustsee.ui.ChannelActivity;
 import com.android1604.mustsee.view.IInformationView;
 
 import java.util.ArrayList;
@@ -24,13 +28,17 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InformationFragment extends Fragment implements IInformationView,View.OnClickListener {
+public class InformationFragment extends Fragment implements IInformationView {
 
     private IInformationPresenter informationPresenter;
     private TabLayout mTab;
-    private List<String> titleList = new ArrayList<>();
+    private ArrayList<String> titleList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
     private ViewPagerAdapter mAdapter;
+    private Context mContext;
+    private ViewPager mViewPager;
+    private ImageView addChannel;
+    private TextView mSearchTxt;
 
     public static InformationFragment newInstance() {
         return new InformationFragment();
@@ -39,6 +47,7 @@ public class InformationFragment extends Fragment implements IInformationView,Vi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = getContext();
         informationPresenter = new InformationPresenterImpl(this);
     }
 
@@ -47,15 +56,37 @@ public class InformationFragment extends Fragment implements IInformationView,Vi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, container, false);
         mTab = (TabLayout) view.findViewById(R.id.information_tab_layout);
-        ViewPager mViewPager = (ViewPager) view.findViewById(R.id.information_vp);
-        ImageView addChannel = (ImageView) view.findViewById(R.id.information_add_iv);
-        addChannel.setOnClickListener(this);
+        mViewPager = (ViewPager) view.findViewById(R.id.information_vp);
+        addChannel = (ImageView) view.findViewById(R.id.information_add_iv);
+        mSearchTxt = (TextView) view.findViewById(R.id.information_search_txt);
         informationPresenter.getTabTiles();
+        informationPresenter.getSearchContent();
         mAdapter = new ViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mAdapter);
         mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTab.setupWithViewPager(mViewPager);
+        initListener();
         return view;
+    }
+
+    private void initListener() {
+        addChannel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentItem = mViewPager.getCurrentItem();
+                Intent intent = new Intent(mContext, ChannelActivity.class);
+                intent.putStringArrayListExtra("titleList",titleList);
+                intent.putExtra("currentItem",currentItem);
+                startActivity(intent);
+            }
+        });
+
+        mSearchTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+            }
+        });
     }
 
     @Override
@@ -67,8 +98,8 @@ public class InformationFragment extends Fragment implements IInformationView,Vi
     }
 
     @Override
-    public void onClick(View v) {
-        //TODO
+    public void getSearchContent(String content) {
+        mSearchTxt.setText(content);
     }
 
 

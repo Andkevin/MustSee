@@ -10,6 +10,6 @@
     <color name="colorGray">#C0C0C0</color>
     <color name="colorBlack">#000000</color>
     <color name="colorLightGray">#D6D6D6</color>
-    <color name="colorTranslucentBalck">#50000000</color>
-    <color name="colorSlightGray">#C3C3C3</color>
+    <color name="colorDefaultGray">#F2F2F2</color>
+
 </resources>

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.NewsListAdapter;
@@ -61,7 +62,12 @@ public class NewsFragment extends Fragment implements INewsView {
     }
 
     private void initListener() {
-
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO
+            }
+        });
     }
 
     private void getDatas(){

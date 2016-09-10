@@ -1,5 +1,6 @@
 package com.android1604.mustsee.model.impl;
 
+import com.android1604.mustsee.bean.SearchContentBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
 import com.android1604.mustsee.model.IInformationModel;
 import com.android1604.mustsee.presenter.IInformationPresenter;
@@ -27,5 +28,18 @@ public class InformationModelImpl implements IInformationModel {
                     }
                 });
 
+    }
+
+    @Override
+    public void getSearchContent(final IInformationPresenter.TabTitlesCallBack callBack) {
+        HttpUtils.getHttpService().getSearchContent()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<SearchContentBean>() {
+                    @Override
+                    public void call(SearchContentBean searchContentBean) {
+                        callBack.contentSuccess(searchContentBean);
+                    }
+                });
     }
 }

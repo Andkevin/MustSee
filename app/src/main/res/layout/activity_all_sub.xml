@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDefaultGray"
+    android:paddingBottom="20dp"
+    tools:context="com.android1604.mustsee.ui.AllSubActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/all_sub_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/selectedTextColor"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/all_sub_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/detail_title_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:text="@string/all_sub"/>
+    </android.support.v7.widget.Toolbar>
+    <ListView
+        android:id="@+id/all_sub_left_list_lv"
+        android:layout_width="@dimen/all_sub_left_list_width"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:layout_below="@id/all_sub_toolbar"/>
+    <ListView
+        android:id="@+id/all_sub_right_list_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:scrollbars="none"
+        android:paddingLeft="20dp"
+        android:layout_toRightOf="@id/all_sub_left_list_lv"
+        android:layout_below="@id/all_sub_toolbar"/>
+
+</RelativeLayout>

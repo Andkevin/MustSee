@@ -1,5 +1,6 @@
 package com.android1604.mustsee.presenter;
 
+import com.android1604.mustsee.bean.SearchContentBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
 
 /**
@@ -12,8 +13,15 @@ public interface IInformationPresenter {
      */
     void getTabTiles();
 
+    /**
+     * 获取搜索框的内容
+     */
+    void getSearchContent();
 
-     interface TabTitlesCallBack{
+
+    interface TabTitlesCallBack {
         void success(TabTitlesBean tabTitlesBean);
+
+        void contentSuccess(SearchContentBean searchContentBean);
     }
 }

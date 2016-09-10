@@ -13,4 +13,5 @@ public interface INewsView {
      * 新闻列表数据
      */
     void refreshView(List<NewsBean.BodyBean.NewsListBean> newsList);
+
 }

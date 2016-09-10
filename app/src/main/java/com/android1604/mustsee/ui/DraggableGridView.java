@@ -33,7 +33,7 @@ public class DraggableGridView extends ViewGroup implements View.OnTouchListener
     protected boolean enabled = true, touching = false;
     //anim vars
     public static int animT = 150;
-    protected ArrayList<Integer> newPositions = new ArrayList<Integer>();
+    protected ArrayList<Integer> newPositions = new ArrayList<>();
     //listeners
     protected OnRearrangeListener onRearrangeListener;
     protected OnClickListener secondaryOnClickListener;
@@ -90,12 +90,12 @@ public class DraggableGridView extends ViewGroup implements View.OnTouchListener
     public void addView(View child) {
     	super.addView(child);
     	newPositions.add(-1);
-    };
+    }
     @Override
     public void removeViewAt(int index) {
     	super.removeViewAt(index);
     	newPositions.remove(index);
-    };
+    }
     
     //LAYOUT
     @Override

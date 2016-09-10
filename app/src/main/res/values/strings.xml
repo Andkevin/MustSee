@@ -3,6 +3,13 @@
     <string name="information">资讯</string>
     <string name="explore">探索</string>
     <string name="mine">我的</string>
+    <string name="all_sub">订阅大全</string>
+    <string name="channel">频道</string>
+    <string name="my_channel">我的频道</string>
+    <string name="push_channel">推荐频道</string>
+    <string name="channel_tips">拖动频道可排序</string>
+    <string name="channel_manage">管理</string>
+    <string name="channel_search">搜索您感兴趣的任意频道</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

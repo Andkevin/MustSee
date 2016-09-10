@@ -104,6 +104,9 @@
             android:value="4BmUpwg3wGyDtaIypCongiZ0N1lqiu7F" />
         //key:开发者申请的key
         <!-- baidu end -->
+        <activity android:name=".StartActivity" />
+        <activity android:name=".ui.ExploreHotSubActivity" />
+        <activity android:name=".ui.AllSubActivity" />
         <activity android:name=".StartActivity"/>
         <activity android:name=".ui.ExploreNewsSubActivity"/>
         <activity android:name=".ui.ChannelActivity"/>
