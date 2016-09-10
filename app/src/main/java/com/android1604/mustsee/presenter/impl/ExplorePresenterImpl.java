@@ -1,10 +1,10 @@
-package com.android1604.mustsee.presenter;
+package com.android1604.mustsee.presenter.impl;
 
 import com.android1604.mustsee.bean.ExploreInfoBean;
-import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.bean.NewsBean;
-import com.android1604.mustsee.model.ExploreModelImpl;
+import com.android1604.mustsee.model.impl.ExploreModelImpl;
 import com.android1604.mustsee.model.IExploreModel;
+import com.android1604.mustsee.presenter.IExplorePresenter;
 import com.android1604.mustsee.view.IExploreView;
 
 /**

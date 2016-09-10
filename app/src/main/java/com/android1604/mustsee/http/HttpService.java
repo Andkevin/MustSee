@@ -48,6 +48,38 @@ public interface HttpService {
     Observable<NewsBean> getNewsList(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("indexId") String indexId,@Query("lastId") String lastId);
 
 
+    /**
+     * 请求订阅大全左侧列表
+     */
+    @GET("/headline/subscribe/subscribe.cate.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
+    Observable<AllSubLeftBean>  getLeftList();
+
+    /**
+     * 请求订阅大全右侧列表
+     */
+    @POST("/headline/subscribe/cate.children.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
+    Observable<AllSubRightBean> getRightList(@Query("parentId") String parentId);
+
+    /**
+     * 请求推荐的频道
+     */
+    @GET("/headline/subscribe/my.channel.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
+    Observable<PushChannelBean> getPushChannel();
+
+    /**
+     * 添加频道
+     */
+    @POST("/headline/subscribe/subscribe.channel.add.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
+    void addChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
+
+
+    /**
+     * 删除频道
+     */
+    @POST("/headline/subscribe/subscribe.channel.delete.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
+    void deleteChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
+
+
     //---请求'探索'主页数据---
     @GET("/headline/webdata/love.explore.groovy")
     Observable<ExploreInfoBean> queryExploreInfo();
@@ -56,66 +88,4 @@ public interface HttpService {
     @POST("/headline/search/search.content.groovy")
     Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword);
 
-    /**
-     * 请求订阅大全左侧列表
-     */
-    @GET("/headline/subscribe/subscribe.cate.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    Observable<AllSubLeftBean>  getLeftList();
-
-    /**
-     * 请求订阅大全左侧列表
-     */
-    @GET("/headline/subscribe/subscribe.cate.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    Observable<AllSubLeftBean>  getLeftList();
-
-    /**
-     * 请求订阅大全右侧列表
-     */
-    @POST("/headline/subscribe/cate.children.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    Observable<AllSubRightBean> getRightList(@Query("parentId") String parentId);
-
-
-    /**
-     * 请求推荐的频道
-     */
-    @GET("/headline/subscribe/my.channel.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    Observable<PushChannelBean> getPushChannel();
-
-    /**
-     * 添加频道
-     */
-    @POST("/headline/subscribe/subscribe.channel.add.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    void addChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
-
-
-    /**
-     * 删除频道
-     */
-    @POST("/headline/subscribe/subscribe.channel.delete.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    void deleteChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
-    /**
-     * 请求订阅大全右侧列表
-     */
-    @POST("/headline/subscribe/cate.children.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    Observable<AllSubRightBean> getRightList(@Query("parentId") String parentId);
-
-
-    /**
-     * 请求推荐的频道
-     */
-    @GET("/headline/subscribe/my.channel.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    Observable<PushChannelBean> getPushChannel();
-
-    /**
-     * 添加频道
-     */
-    @POST("/headline/subscribe/subscribe.channel.add.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    void addChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
-
-
-    /**
-     * 删除频道
-     */
-    @POST("/headline/subscribe/subscribe.channel.delete.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
-    void deleteChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
 }

@@ -2,13 +2,11 @@ package com.android1604.mustsee.fragment;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +18,8 @@ import android.widget.Toast;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
-import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.bean.NewsBean;
-import com.android1604.mustsee.http.HttpUtils;
-import com.android1604.mustsee.presenter.ExplorePresenterImpl;
+import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -33,14 +29,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 public class ExploreFragment extends Fragment implements IExploreView{
     private Context mContext;
     private PullToRefreshListView mLv;
-    private  LinearLayout mIndicView;
-    private int mIndicCount;
-    private ViewPager mListViewPager;
     private ExploreInfoBean mExploreInfoBean;
     private boolean netReqFinish = false;
     private ExplorePresenterImpl mExplorePresenter;
@@ -158,17 +149,6 @@ public class ExploreFragment extends Fragment implements IExploreView{
         mExploreListAdapter.notifyDataSetChanged();
         mPageLoadingView.setVisibility(View.GONE);
         mHandler.sendEmptyMessage(ANIM_STOP);
-    }
-
-    /**
-     * 功能:控制ViewPager的Indicator显示变换
-     */
-    private void indicatorCtl(int index) {
-        ImageView view = (ImageView) mIndicView.getChildAt(index);
-        for (int i = 0; i < mIndicCount; i++) {
-            mIndicView.getChildAt(i).setEnabled(false);
-        }
-        view.setEnabled(true);
     }
 
     /**
