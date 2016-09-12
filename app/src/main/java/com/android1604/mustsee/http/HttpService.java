@@ -54,14 +54,6 @@ public interface HttpService {
     @POST("/headline/webdata/homepage.news.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
     Observable<NewsBean> getNewsList(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("indexId") String indexId,@Query("lastId") String lastId);
 
-    /**
-     * 请求'探索'主页数据
-     */
-    @GET("/headline/webdata/love.explore.groovy")
-    Observable<ExploreInfoBean> queryExploreInfo();
-
-    @POST("/headline/search/search.content.groovy")
-    Observable<ExploreSubscribeBean> querySubscribeList(@Query("keyword") String keyword);
 
     /**
      * 请求订阅大全左侧列表
@@ -74,7 +66,6 @@ public interface HttpService {
      */
     @POST("/headline/subscribe/cate.children.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
     Observable<AllSubRightBean> getRightList(@Query("parentId") String parentId);
-
 
     /**
      * 请求推荐的频道
@@ -101,5 +92,15 @@ public interface HttpService {
      */
     @POST("/headline/subscribe/channel.sort.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
     Observable<SortBean> sortChannel(@Query("channels")ArrayList<TabTitlesBean.BodyBean.DataListBean> channels);
+
+
+
+    //---请求'探索'主页数据---
+    @GET("/headline/webdata/love.explore.groovy")
+    Observable<ExploreInfoBean> queryExploreInfo();
+
+    //---查询资讯列表数据---
+    @POST("/headline/search/search.content.groovy")
+    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword);
 
 }

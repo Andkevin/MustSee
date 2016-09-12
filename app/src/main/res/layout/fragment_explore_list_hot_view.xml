@@ -26,7 +26,7 @@
             android:textColor="@color/colorGray"/>
     </RelativeLayout>
 
-    <GridView
+    <com.android1604.mustsee.ui.MyGridView
         android:id="@+id/fragment_explore_list_hot_item_gridview_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

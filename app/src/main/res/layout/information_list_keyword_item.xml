@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/item_keyword_image_iv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/item_keyword_keyname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_keyword_image_iv"
+        android:text="关键字"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_keyword_subcount_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_keyword_keyname_tv"
+        android:layout_below="@id/item_keyword_keyname_tv"
+        android:text="订阅数量"
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorGray" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:text="查看"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

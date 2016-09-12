@@ -7,13 +7,9 @@ import com.android1604.mustsee.presenter.IExplorePresenter;
  */
 public interface IExploreModel {
 
-    /**
-     * 查询探索界面列表信息
-     */
+    //查询探索界面列表信息
     void queryExploreList(IExplorePresenter.ExploreInfoCallback exploreInfoCallback);
 
-    /**
-     * 查询探索界面热闹订阅列表信息
-     */
-    void queryHotSubList(String keyword,IExplorePresenter.HotSubListCallback hotSubListCallback);
+    //查询资讯订阅列表信息
+    void queryNewsSubList(String keyword,IExplorePresenter.NewsSubListCallback newsSubListCallback);
 }
