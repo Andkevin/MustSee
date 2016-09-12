@@ -15,7 +15,7 @@ public interface IInformationView {
     /**
      * 刷新资讯Tab列表
      */
-    void refreshTabLayout(String title,Bundle bundle);
+    void refreshTabLayout(Bundle bundle);
 
     /**
      * 获取搜索框中内容

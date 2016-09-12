@@ -12,5 +12,5 @@ public interface IChannelView {
     /**
      * 刷新推荐频道
      */
-    void refreshPushChannel(List<PushChannelBean.BodyBean.DataListBean> pushChannelList);
+    void refreshDragView(List<PushChannelBean.BodyBean.DataListBean> pushChannelList);
 }

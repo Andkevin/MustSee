@@ -18,18 +18,6 @@ public interface IAllSubPresenter {
      */
     void getRightList(String parentId);
 
-    /**
-     * 添加频道
-     */
-    void addChannel(String category,String keyword,String srpId);
-
-
-    /**
-     * 删除频道
-     */
-    void deleteChannel(String category,String keyword,String srpId);
-
-
 
     interface AllSubCallBack {
         void successLeft(AllSubLeftBean allSubLeftBean);

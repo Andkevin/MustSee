@@ -1,5 +1,6 @@
 package com.android1604.mustsee.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -76,7 +77,8 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
         mRightListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO
+//                Intent intent = new Intent(AllSubActivity.this,);
+//                startActivity(intent);
             }
         });
 
@@ -117,8 +119,12 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = LayoutInflater.from(AllSubActivity.this).inflate(R.layout.all_sub_left_list_item, parent, false);
-            TextView textView = (TextView) convertView.findViewById(R.id.all_sub_left_txt);
+            View view;
+            if(convertView == null){
+                convertView = LayoutInflater.from(AllSubActivity.this).inflate(R.layout.all_sub_left_list_item, parent, false);
+            }
+            view = convertView;
+            TextView textView = (TextView) view.findViewById(R.id.all_sub_left_txt);
             textView.setText(leftDatas.get(position).getCateName());
             if(mSelect==position) {
                 textView.setTextColor(Color.RED);
@@ -126,7 +132,7 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
             }else{
                 textView.setTextColor(Color.BLACK);
             }
-            return convertView;
+            return view;
         }
 
         public void changeSelected(int positon){
@@ -156,7 +162,7 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
+            final ViewHolder viewHolder;
             if(convertView == null){
                 convertView = LayoutInflater.from(AllSubActivity.this).inflate(R.layout.all_sub_right_list_item,parent,false);
                 viewHolder = new ViewHolder(convertView);
@@ -164,8 +170,10 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             String logo = rightDatas.get(position).getLogo();
-            String keyword = rightDatas.get(position).getKeyword();
-            String subscriber = rightDatas.get(position).getSubscriber();
+            final String category = rightDatas.get(position).getCategory();
+            final String keyword = rightDatas.get(position).getKeyword();
+            final String srpId = rightDatas.get(position).getSrpId();
+            final String subscriber = rightDatas.get(position).getSubscriber();
             viewHolder.keyword.setText(keyword);
             Picasso.with(AllSubActivity.this).load(logo).into(viewHolder.logo);
             switch (subscriber){
@@ -177,6 +185,21 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
                     viewHolder.addImage.setImageResource(R.drawable.subscribe_add01);
                     break;
             }
+            viewHolder.addImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (subscriber){
+                        case "1":
+                            viewHolder.addImage.setImageResource(R.drawable.subscribe_add01);
+                            AllSubPresenterImpl.subDeleteChannel(category,keyword,srpId);
+                            break;
+                        case "0":
+                            viewHolder.addImage.setImageResource(R.drawable.subscribe_cancel01);
+                            AllSubPresenterImpl.subAddChannel(category, keyword,srpId);
+                            break;
+                    }
+                }
+            });
             return convertView;
         }
 

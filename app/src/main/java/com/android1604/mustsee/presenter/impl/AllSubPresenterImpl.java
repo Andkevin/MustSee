@@ -14,14 +14,13 @@ import java.util.List;
  *
  */
 public class AllSubPresenterImpl implements IAllSubPresenter,IAllSubPresenter.AllSubCallBack {
-    private IAllSubModel allSubModel;
+    private static IAllSubModel allSubModel = new AllSubModelImpl();
     private IAllSubView allSubView;
-    private String clickFrom = "subscribe";
+    private static final String CLICKFROMSUBSCRIBE = "subscribe";
 
 
     public AllSubPresenterImpl(IAllSubView allSubView) {
         this.allSubView = allSubView;
-        this.allSubModel = new AllSubModelImpl();
     }
 
     @Override
@@ -34,14 +33,12 @@ public class AllSubPresenterImpl implements IAllSubPresenter,IAllSubPresenter.Al
         allSubModel.getRightList(parentId,this);
     }
 
-    @Override
-    public void addChannel(String category, String keyword, String srpId) {
-        allSubModel.addChannel(category, keyword, srpId, clickFrom);
+    public static void subAddChannel(String category, String keyword, String srpId) {
+        allSubModel.addChannel(category, keyword, srpId, CLICKFROMSUBSCRIBE);
     }
 
-    @Override
-    public void deleteChannel(String category, String keyword, String srpId) {
-        allSubModel.deleteChannel(category, keyword, srpId, clickFrom);
+    public static void subDeleteChannel(String category, String keyword, String srpId) {
+        allSubModel.deleteChannel(category, keyword, srpId, CLICKFROMSUBSCRIBE);
     }
 
     @Override
@@ -51,6 +48,7 @@ public class AllSubPresenterImpl implements IAllSubPresenter,IAllSubPresenter.Al
             allSubView.refreshLeftList(dataList);
         }
     }
+
 
     @Override
     public void successRight(AllSubRightBean allSubRightBean) {
