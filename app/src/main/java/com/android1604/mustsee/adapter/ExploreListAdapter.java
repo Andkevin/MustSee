@@ -16,12 +16,13 @@ import android.widget.Toast;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.ui.ExploreNewsSubActivity;
+import com.android1604.mustsee.ui.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by my on 2016/9/7.
+ * Created by Kevin on 2016/9/7.
  */
 public class ExploreListAdapter extends BaseAdapter {
     private Context mContext;
@@ -75,12 +76,14 @@ public class ExploreListAdapter extends BaseAdapter {
         GridView mGv = (GridView) view.findViewById(R.id.fragment_explore_list_hot_item_gridview_gv);
         final ExploreListHotGridAdapter gridAdapter = new ExploreListHotGridAdapter(mContext,curGridAdapterList);
         mGv.setAdapter(gridAdapter);
-//        ListViewUtils.reMeasureHeightOnSubList(mGv);
         batchTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "换一批!!!", Toast.LENGTH_SHORT).show();
-                gridAdapter.notifyDataSetChanged();
+//                gridAdapter.notifyDataSetChanged();
+                Intent intent = new Intent(mContext, SearchActivity.class);
+                intent.putExtra("keyword","Hello");
+                mContext.startActivity(intent);
             }
         });
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

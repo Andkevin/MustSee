@@ -1,10 +1,15 @@
 package com.android1604.mustsee.ui;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android1604.mustsee.BaseActivity;
@@ -12,8 +17,11 @@ import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.NewsListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.SearchAutoTipBean;
+import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +30,7 @@ import java.util.List;
  * Created by my on 2016/9/8.
  */
 public class ExploreNewsSubActivity extends BaseActivity implements IExploreView, View.OnClickListener {
+    private Context mContext;
     private ExplorePresenterImpl mExplorePresenter;
     private TextView mSubscribeTxt;
     private PullToRefreshListView mRefreshLv;
@@ -30,11 +39,14 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
     private TextView mKeywordTxt;
     private NewsListAdapter mNewsListAdapter;
     private List<NewsBean.BodyBean.NewsListBean> newsBeanList = new ArrayList<>();
+    public static final int LV_REQ_ADDMORE = 0;
+    private String lastId = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.explore_hotsubscribe_titlelist_activity_view);
+        mContext = this;
         mExplorePresenter = new ExplorePresenterImpl(this);
         mKeyword = getIntent().getExtras().getString("keyword");
         if (mKeyword == null) {
@@ -42,7 +54,7 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
             return;
         }
         initView();
-        mExplorePresenter.queryNewsSubList(mKeyword);
+        mExplorePresenter.queryNewsSubList(mKeyword,"0");
     }
 
     private void initView() {
@@ -58,12 +70,49 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
 
     @Override
     public void applyNewsSubList(NewsBean newsBean) {
-        newsBeanList.addAll(newsBean.getBody().getNewsList());
-        mNewsListAdapter = new NewsListAdapter(this, newsBeanList);
-        mRefreshLv.setAdapter(mNewsListAdapter);
-        mNewsListAdapter.notifyDataSetChanged();
+        if(lastId.equals("0")){
+            newsBeanList.clear();
+            newsBeanList.addAll(newsBean.getBody().getNewsList());
+            mNewsListAdapter = new NewsListAdapter(this, newsBeanList);
+            mRefreshLv.setAdapter(mNewsListAdapter);
+            mNewsListAdapter.notifyDataSetChanged();
+            listRefreshCtrl();
+        }else{
+            newsBeanList.addAll(newsBean.getBody().getNewsList());
+            mNewsListAdapter.notifyDataSetChanged();
+            mHandler.sendEmptyMessage(LV_REQ_ADDMORE);
+        }
     }
 
+    /**
+     * ListView刷新的监听事件
+     */
+    private void listRefreshCtrl() {
+        mRefreshLv.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        mRefreshLv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {}
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                refreshView.getLoadingLayoutProxy().setRefreshingLabel("推荐中...");
+                refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
+                lastId = newsBeanList.get(newsBeanList.size() - 1).getId();
+                Log.d("lastIdlastId","============================"+lastId);
+                if(!lastId.equals("0")){
+                    mExplorePresenter.queryNewsSubList(mKeyword,lastId);
+                }else{
+                    Toast.makeText(mContext, "lastId无效!!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * List的Item点击事件
+     * 跳转到相关详情Activity页面
+     */
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -88,9 +137,23 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
         }
     }
 
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case LV_REQ_ADDMORE:
+                    mRefreshLv.onRefreshComplete();
+                    break;
+            }
+        }
+    };
+
     //无需使用
     @Override
-    public void applyExploreInfo(ExploreInfoBean exploreInfoBean) {
-    }
+    public void applyExploreInfo(ExploreInfoBean exploreInfoBean) {}
+    @Override
+    public void applyHotSearchList(SearchHotBean searchHotBean) {}
+    @Override
+    public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {}
 
 }

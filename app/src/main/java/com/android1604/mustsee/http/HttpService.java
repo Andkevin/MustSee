@@ -6,7 +6,9 @@ import com.android1604.mustsee.bean.AllSubRightBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.bean.PushChannelBean;
+import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchContentBean;
+import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.bean.StartBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
@@ -80,12 +82,19 @@ public interface HttpService {
     void deleteChannel(@Query("category") String category,@Query("keyword") String keyword,@Query("srpId") String srpId,@Query("clickFrom") String clickFrom);
 
 
-    //---请求'探索'主页数据---
+    //---请求探索主页数据---
     @GET("/headline/webdata/love.explore.groovy")
     Observable<ExploreInfoBean> queryExploreInfo();
 
     //---查询资讯列表数据---
     @POST("/headline/search/search.content.groovy")
-    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword);
+    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword,@Query("lastId") String lastId);
 
+    //---查询搜索中的热搜数据---
+    @GET("/headline/search/hotsearch.list.groovy")
+    Observable<SearchHotBean> queryHotSearchInfo();
+
+    //---查询搜索中的关键字自动补全数据---
+    @POST("/headline/recommend/search.enjoy.content.groovy")
+    Observable<SearchAutoTipBean> queryAutoSearchInfo(@Query("keyword") String keyword);
 }

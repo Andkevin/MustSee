@@ -19,6 +19,8 @@ import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.SearchAutoTipBean;
+import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -91,7 +93,7 @@ public class ExploreFragment extends Fragment implements IExploreView{
     }
 
     /**
-     * 初始化ListView的头部
+     * 初始化ListView的头部Banner
      */
     private void initListHeader() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_header_view,null);
@@ -113,7 +115,9 @@ public class ExploreFragment extends Fragment implements IExploreView{
             }
         });
     }
-
+    /**
+     * Banner需要使用的HolderView类
+     */
     public class NetImageHolderView implements Holder<ExploreInfoBean.BodyBean.RollingImagesListBean>{
         private TextView titleTxt;
         private ImageView imgView;
@@ -127,7 +131,6 @@ public class ExploreFragment extends Fragment implements IExploreView{
 
         @Override
         public void UpdateUI(Context context, int position, ExploreInfoBean.BodyBean.RollingImagesListBean data) {
-//            ExploreInfoBean.BodyBean.RollingImagesListBean rollingObj = data.get(position);
             titleTxt.setText(data.getTitle());
             Picasso.with(context).load(data.getImageUrl()).into(imgView);
         }
@@ -207,4 +210,8 @@ public class ExploreFragment extends Fragment implements IExploreView{
     //无需使用
     @Override
     public void applyNewsSubList(NewsBean newsBean) {}
+    @Override
+    public void applyHotSearchList(SearchHotBean searchHotBean) {}
+    @Override
+    public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {}
 }
