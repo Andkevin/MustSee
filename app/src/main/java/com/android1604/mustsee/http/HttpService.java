@@ -10,17 +10,12 @@ import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.bean.PushChannelBean;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchContentBean;
-<<<<<<< HEAD
 import com.android1604.mustsee.bean.SearchHotBean;
-=======
 import com.android1604.mustsee.bean.SortBean;
->>>>>>> eaf4345bc8f83ec820e00bffb9cda1d432fe179c
 import com.android1604.mustsee.bean.StartBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -106,7 +101,6 @@ public interface HttpService {
     @POST("/headline/search/search.content.groovy")
     Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword,@Query("lastId") String lastId);
 
-<<<<<<< HEAD
     //---查询搜索中的热搜数据---
     @GET("/headline/search/hotsearch.list.groovy")
     Observable<SearchHotBean> queryHotSearchInfo();
@@ -114,10 +108,5 @@ public interface HttpService {
     //---查询搜索中的关键字自动补全数据---
     @POST("/headline/recommend/search.enjoy.content.groovy")
     Observable<SearchAutoTipBean> queryAutoSearchInfo(@Query("keyword") String keyword);
-=======
 
-
-
-
->>>>>>> eaf4345bc8f83ec820e00bffb9cda1d432fe179c
 }
