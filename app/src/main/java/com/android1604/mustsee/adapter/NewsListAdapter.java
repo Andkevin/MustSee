@@ -123,7 +123,7 @@ public class NewsListAdapter extends BaseAdapter implements View.OnClickListener
                 bigTitleTxt.setText(newsList.get(position).getTitle());
                 bigFromTxt.setText(newsList.get(position).getFootView().getSource());
                 if (!"".equals(newsList.get(position).getImage()) && newsList.get(position).getImage() != null) {
-                    Log.d(TAG, "getView: " + newsList.get(position).getBigImgUrl());
+                    Log.d(TAG, "getView: " + newsList.get(position).getBigImgUrl()+"zzzz");
                     Picasso.with(mContext).load(newsList.get(position).getBigImgUrl()).into(bigImage);
                 } else {
                     bigImage.setVisibility(View.GONE);

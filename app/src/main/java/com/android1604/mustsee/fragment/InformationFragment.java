@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.List;
  */
 public class InformationFragment extends Fragment implements IInformationView {
 
+    private static final String TAG = "zengzhen";
     private IInformationPresenter informationPresenter;
     private TabLayout mTab;
     private ArrayList<String> titleList = new ArrayList<>();
@@ -39,6 +41,7 @@ public class InformationFragment extends Fragment implements IInformationView {
     private ViewPager mViewPager;
     private ImageView addChannel;
     private TextView mSearchTxt;
+    private int currentItem = 0;
 
     public static InformationFragment newInstance() {
         return new InformationFragment();
@@ -59,8 +62,6 @@ public class InformationFragment extends Fragment implements IInformationView {
         mViewPager = (ViewPager) view.findViewById(R.id.information_vp);
         addChannel = (ImageView) view.findViewById(R.id.information_add_iv);
         mSearchTxt = (TextView) view.findViewById(R.id.information_search_txt);
-        informationPresenter.getTabTiles();
-        informationPresenter.getSearchContent();
         mAdapter = new ViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mAdapter);
         mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -69,15 +70,30 @@ public class InformationFragment extends Fragment implements IInformationView {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        informationPresenter.getTabTiles();
+        informationPresenter.getSearchContent();
+        mAdapter.notifyDataSetChanged();
+        Log.d(TAG, "onStart: "+currentItem);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        titleList.clear();
+        fragmentList.clear();
+    }
+
     private void initListener() {
         addChannel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentItem = mViewPager.getCurrentItem();
+                currentItem = mViewPager.getCurrentItem();
                 Intent intent = new Intent(mContext, ChannelActivity.class);
-                intent.putStringArrayListExtra("titleList",titleList);
                 intent.putExtra("currentItem",currentItem);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -90,11 +106,21 @@ public class InformationFragment extends Fragment implements IInformationView {
     }
 
     @Override
-    public void refreshTabLayout(String title,Bundle bundle) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data != null){
+            Log.d(TAG, "onActivityResult: ");
+            currentItem = data.getIntExtra("current", 0);
+        }
+    }
+
+    @Override
+    public void refreshTabLayout(Bundle bundle) {
+        String title = bundle.getString("title");
         mTab.addTab(mTab.newTab().setText(title));
         titleList.add(title);
         fragmentList.add(NewsFragment.newInstance(bundle));
         mAdapter.notifyDataSetChanged();
+        mViewPager.setCurrentItem(currentItem);
     }
 
     @Override

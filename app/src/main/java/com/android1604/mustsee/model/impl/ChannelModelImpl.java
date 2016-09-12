@@ -1,9 +1,12 @@
 package com.android1604.mustsee.model.impl;
 
 import com.android1604.mustsee.bean.PushChannelBean;
+import com.android1604.mustsee.bean.TabTitlesBean;
 import com.android1604.mustsee.http.HttpUtils;
 import com.android1604.mustsee.model.IChannelModel;
 import com.android1604.mustsee.presenter.IChannelPresenter;
+
+import java.util.ArrayList;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -29,11 +32,16 @@ public class ChannelModelImpl implements IChannelModel{
 
     @Override
     public void addChannel(String category, String keyword, String srpId, String clickFrom) {
-        HttpUtils.getHttpService().addChannel(category,keyword,srpId,clickFrom);
+        HttpUtils.getHttpService().addChannel(category,keyword,srpId,clickFrom).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe();
     }
 
     @Override
     public void deleteChannel(String category, String keyword, String srpId, String clickFrom) {
-        HttpUtils.getHttpService().deleteChannel(category,keyword,srpId,clickFrom);
+        HttpUtils.getHttpService().deleteChannel(category,keyword,srpId,clickFrom).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    @Override
+    public void sortChannel(ArrayList<TabTitlesBean.BodyBean.DataListBean> channels) {
+        HttpUtils.getHttpService().sortChannel(channels).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe();
     }
 }

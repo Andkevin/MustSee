@@ -44,12 +44,12 @@ public class AllSubModelImpl implements IAllSubModel{
 
     @Override
     public void addChannel(String category, String keyword, String srpId, String clickFrom) {
-        HttpUtils.getHttpService().addChannel(category,keyword,srpId,clickFrom);
+        HttpUtils.getHttpService().addChannel(category,keyword,srpId,clickFrom).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe();
     }
 
     @Override
     public void deleteChannel(String category, String keyword, String srpId, String clickFrom) {
-        HttpUtils.getHttpService().deleteChannel(category,keyword,srpId,clickFrom);
+        HttpUtils.getHttpService().deleteChannel(category,keyword,srpId,clickFrom).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe();
     }
 
 

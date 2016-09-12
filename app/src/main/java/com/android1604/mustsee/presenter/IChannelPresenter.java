@@ -13,17 +13,6 @@ public interface IChannelPresenter {
     void getPushChannel();
 
 
-    /**
-     * 添加频道
-     */
-    void addChannel(String category,String keyword,String srpId);
-
-
-    /**
-     * 删除频道
-     */
-    void deleteChannel(String category,String keyword,String srpId);
-
     interface ChannelCallBack{
         void success(PushChannelBean pushChannelBean);
     }

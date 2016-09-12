@@ -124,6 +124,12 @@ public class TabTitlesBean {
             public void setKeyword(String keyword) {
                 this.keyword = keyword;
             }
+
+            @Override
+            public String toString() {
+                String str = "{'category':"+"'"+this.category+"'"+",'srpId':"+"'"+this.srpId+"'}";
+                return str;
+            }
         }
     }
 }

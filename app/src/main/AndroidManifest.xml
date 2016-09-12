@@ -107,7 +107,7 @@
         <activity android:name=".StartActivity" />
         <activity android:name=".ui.ExploreHotSubActivity" />
         <activity android:name=".ui.AllSubActivity" />
-        <activity android:name=".ui.ChannelActivity"/>
+        <activity android:name=".ui.ChannelActivity" />
     </application>
 
 </manifest>

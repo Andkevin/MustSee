@@ -9,6 +9,7 @@ import com.android1604.mustsee.model.impl.InformationModelImpl;
 import com.android1604.mustsee.presenter.IInformationPresenter;
 import com.android1604.mustsee.view.IInformationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ import java.util.List;
 public class InformationPresenterImpl implements IInformationPresenter,IInformationPresenter.TabTitlesCallBack{
     private IInformationModel informationModel;
     private IInformationView informationView;
+    private static List<TabTitlesBean.BodyBean.DataListBean> datas = new ArrayList<>();
 
     public InformationPresenterImpl(IInformationView informationView) {
         this.informationView = informationView;
@@ -38,32 +40,42 @@ public class InformationPresenterImpl implements IInformationPresenter,IInformat
     public void success(TabTitlesBean tabTitlesBean) {
         if(tabTitlesBean != null){
             List<TabTitlesBean.BodyBean.DataListBean> dataList = tabTitlesBean.getBody().getDataList();
+            datas.clear();
             for (int i = 0; i < dataList.size(); i++) {
+                TabTitlesBean.BodyBean.DataListBean bean = dataList.get(i);
+                datas.add(bean);
                 Bundle bundle = new Bundle();
-                String title = dataList.get(i).getTitle();
-                String srpId = dataList.get(i).getSrpId();
+                String title = bean.getTitle();
+                if(title != null){
+                    bundle.putString("title",title);
+                }
+                String srpId = bean.getSrpId();
                 if(srpId != null){
                     bundle.putString("srpId",srpId);
                 }
-                String sortNum = dataList.get(i).getSortNum();
+                String sortNum = bean.getSortNum();
                 if(sortNum != null){
                     bundle.putString("sortNum",sortNum);
                 }
-                String id = dataList.get(i).getId();
+                String id = bean.getId();
                 if(id != null){
                     bundle.putString("id",id);
                 }
-                String category = dataList.get(i).getCategory();
+                String category = bean.getCategory();
                 if(category != null){
                     bundle.putString("category",category);
                 }
-                String keyword = dataList.get(i).getKeyword();
+                String keyword = bean.getKeyword();
                 if(keyword != null){
                     bundle.putString("keyword",keyword);
                 }
-                informationView.refreshTabLayout(title,bundle);
+                informationView.refreshTabLayout(bundle);
             }
         }
+    }
+
+    public static List<TabTitlesBean.BodyBean.DataListBean> getData(){
+        return datas;
     }
 
     @Override
