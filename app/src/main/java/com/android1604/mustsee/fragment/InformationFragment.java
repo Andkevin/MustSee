@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.android1604.mustsee.R;
 import com.android1604.mustsee.presenter.IInformationPresenter;
 import com.android1604.mustsee.presenter.impl.InformationPresenterImpl;
 import com.android1604.mustsee.ui.ChannelActivity;
+import com.android1604.mustsee.ui.SearchActivity;
 import com.android1604.mustsee.view.IInformationView;
 
 import java.util.ArrayList;
@@ -98,7 +98,8 @@ public class InformationFragment extends Fragment implements IInformationView {
         mSearchTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                Intent intent = new Intent(mContext, SearchActivity.class);
+                mContext.startActivity(intent);
             }
         });
     }

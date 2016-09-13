@@ -5,10 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.NewsListAdapter;
@@ -16,6 +18,7 @@ import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.presenter.INewsPresenter;
 import com.android1604.mustsee.presenter.impl.NewsPresenterImpl;
 import com.android1604.mustsee.view.INewsView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ import java.util.List;
  */
 public class NewsFragment extends Fragment implements INewsView {
 
+    private static final String TAG = "zengzhen";
     private Context mContext;
     private PullToRefreshListView mListView;
     private INewsPresenter newsPresenter;
@@ -54,6 +58,7 @@ public class NewsFragment extends Fragment implements INewsView {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         mListView = (PullToRefreshListView) view.findViewById(R.id.information_list_lv);
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mAdapter = new NewsListAdapter(mContext,datas);
         mListView.setAdapter(mAdapter);
         getDatas();
@@ -68,6 +73,25 @@ public class NewsFragment extends Fragment implements INewsView {
                 //TODO
             }
         });
+
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                indexId = "0";
+                lastId = "0";
+                datas.clear();
+                getDatas();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                refreshView.getLoadingLayoutProxy().setRefreshingLabel("推荐中...");
+                refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
+                lastId = datas.get(datas.size() - 1).getId();
+                getDatas();
+            }
+        });
     }
 
     private void getDatas(){
@@ -78,6 +102,11 @@ public class NewsFragment extends Fragment implements INewsView {
         String category = bundle.getString("category", "");
         String keyword = bundle.getString("keyword", "");
         String srpId = bundle.getString("srpId", "");
+        Log.d(TAG, "getDatas: category="+category);
+        Log.d(TAG, "getDatas: keyword="+keyword);
+        Log.d(TAG, "getDatas: srpId="+srpId);
+        Log.d(TAG, "getDatas: indexId="+indexId);
+        Log.d(TAG, "getDatas: lastId="+lastId);
         newsPresenter.getNewsList(category, keyword, srpId, indexId, lastId);
     }
 
@@ -85,5 +114,6 @@ public class NewsFragment extends Fragment implements INewsView {
     public void refreshView(List<NewsBean.BodyBean.NewsListBean> newsList) {
         datas.addAll(newsList);
         mAdapter.notifyDataSetChanged();
+        mListView.onRefreshComplete();
     }
 }
