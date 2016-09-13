@@ -41,6 +41,7 @@ public class EasyTipDragView extends RelativeLayout implements AbsChannelAdapter
     private MyChannelAdapter mMyChannelAdapter;
     private DragDropGirdView mMyGridView;
     private int current;
+    private TextView searchTxt;
 
     public EasyTipDragView(Context context) {
         this(context,null);
@@ -81,6 +82,7 @@ public class EasyTipDragView extends RelativeLayout implements AbsChannelAdapter
         View view  = LayoutInflater.from(getContext()).inflate(R.layout.easy_tag_drag_view,this);
         closeImg =(ImageView)view.findViewById(R.id.drag_close_img);
         manageTxt =(TextView)view.findViewById(R.id.channel_manage_txt);
+        searchTxt = (TextView) view.findViewById(R.id.channel_search_txt);
         mMyGridView =(DragDropGirdView)view.findViewById(R.id.channel_my_gv);
         mMyGridView.getDragDropController().addOnDragDropListener(mMyChannelAdapter);
         mMyGridView.setDragShadowOverlay((ImageView) view.findViewById(R.id.tile_drag_shadow_overlay));
@@ -114,6 +116,7 @@ public class EasyTipDragView extends RelativeLayout implements AbsChannelAdapter
         closeImg.setOnClickListener(this);
         manageTxt.setTag("manage");
         manageTxt.setOnClickListener(this);
+        searchTxt.setOnClickListener(this);
     }
 
     @Override
@@ -200,6 +203,9 @@ public class EasyTipDragView extends RelativeLayout implements AbsChannelAdapter
                         }
                         break;
                 }
+            case R.id.channel_search_txt:
+                //TODO
+                break;
         }
     }
     //每次由于拖动排序,添加或者删除item时会回调
