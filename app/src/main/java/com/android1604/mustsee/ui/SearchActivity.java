@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import com.android1604.mustsee.BaseActivity;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.NewsListAdapter;
+import com.android1604.mustsee.adapter.SearchAutoListAdapter;
 import com.android1604.mustsee.adapter.SearchHistoryListAdapter;
 import com.android1604.mustsee.adapter.SearchHotGridAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
@@ -72,6 +75,10 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     private List<String> mHistoryList = new ArrayList<>();
     private ListView mHistoryLv;
     private SearchHistoryListAdapter mSearHistoryListAdapter;
+    private SharedPreferences.Editor mSpEditor;
+    private ListView mAutoListLv;
+    private List<SearchAutoTipBean.BodyBean.DataListBean> mAutoTipList = new ArrayList<>();
+    private SearchAutoListAdapter mAutoTipAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,12 +86,9 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         setContentView(R.layout.activity_search_page_layout);
         mContext = this;
         mSharedPref = getSharedPreferences("historylist", Context.MODE_PRIVATE);
+        mSpEditor = mSharedPref.edit();
         mExplorePresenter = new ExplorePresenterImpl(this);
-        mKeyword = getIntent().getExtras().getString("keyword");
-        if (mKeyword == null) {
-            Toast.makeText(this, "关键字为空!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        mKeyword = "test";
         initView();
         mExplorePresenter.queryHotSearchList();
     }
@@ -103,19 +107,39 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         if(mAutoCompTxt != null){
             mAutoCompTxt.setHint("大家都在搜:"+mKeyword);
         }
+        mAutoCompTxt.addTextChangedListener(mTextWatcher);
         mBarDeleIv = (ImageView) findViewById(R.id.activity_search_toolbar_delete_iv);
         mHotGridView = (GridView) findViewById(R.id.activity_search_default_hotgrid_gd);
         mChangeBatTxt = (TextView) findViewById(R.id.activity_search_default_batchange_tv);
         if(mChangeBatTxt != null){
             mChangeBatTxt.setOnClickListener(this);
         }
-        mSharedPref.getStringSet("history",mHistorySet);
-        mHistoryList.addAll(mHistoryList);
         mHistoryLv = (ListView) findViewById(R.id.activity_search_def_historylist_lv);
         mSearHistoryListAdapter= new SearchHistoryListAdapter(this,mHistoryList);
         mHistoryLv.setAdapter(mSearHistoryListAdapter);
-        historyShowCtrl(mHistoryList.size());
+        subViewShowCtl(mSearchDefPageView);
+        mAutoListLv = (ListView) findViewById(R.id.activity_search_page_autolist_subview);
+        mAutoTipAdapter = new SearchAutoListAdapter(this,mAutoTipList);
+        mAutoListLv.setAdapter(mAutoTipAdapter);
+        mAutoListLv.setOnItemClickListener(mItemListener);
     }
+
+    //AutoCompleteTextView文本变动监听事件
+    TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mExplorePresenter.queryAutoSearchList(s.toString());
+            subViewShowCtl(mAutoTipLv);                 //显示自动推荐列表
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     private void historyShowCtrl(int size){
         if(mHistoryList.size() > 0){
@@ -139,10 +163,13 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 mSearchHotGridAdapter.notifyDataSetChanged();
                 break;
             case R.id.activity_search_toolbar_delete_iv:
-
+                mAutoCompTxt.setText("");
                 break;
             case R.id.activity_search_def_delhistory_tv:
-
+                mSpEditor.clear();
+                mSpEditor.commit();
+                mHistoryList.clear();
+                historyShowCtrl(mHistoryList.size());
                 break;
         }
     }
@@ -166,8 +193,6 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
 
     //适配器视图item的点击事件处理
     AdapterView.OnItemClickListener mItemListener = new AdapterView.OnItemClickListener() {
-        private SharedPreferences.Editor mSpEditor;
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             int parentId = parent.getId();
@@ -176,36 +201,48 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 case R.id.activity_search_default_hotgrid_gd:
                     mKeyword = mCurGridAdapterDataList.get(position).getKeyword();
                     mAutoCompTxt.setText(mKeyword);
-                    mHistorySet.add(mKeyword);
-                    mSpEditor = mSharedPref.edit();
-                    mSpEditor.putStringSet("history",mHistorySet);
-                    mSpEditor.commit();
                     mExplorePresenter.queryNewsSubList(mKeyword,"0");
-                    //加载页面的等待动画
-                    subViewShowCtl(mPageLoadingView);
-                    mLoadAnimImg.setBackgroundResource(R.drawable.loading_animation);
-                    mAnimation = (AnimationDrawable) mLoadAnimImg.getBackground();
-                    mLoadAnimImg.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(mAnimation != null && !mAnimation.isRunning()){
-                                mAnimation.start();            //开始等待动画
-                            }
-                        }
-                    });
+                    showLoadingAnim();
+                    break;
+                //搜索自动推荐列表适配器item点击事件
+                case R.id.activity_search_page_autolist_subview:
+                    mKeyword = mAutoTipList.get(position).getKeyword();
+                    mAutoCompTxt.setText(mKeyword);
+                    mExplorePresenter.queryNewsSubList(mKeyword,"0");
+                    showLoadingAnim();
                     break;
             }
         }
     };
 
+    //加载页面的等待动画
+    private void showLoadingAnim(){
+        subViewShowCtl(mPageLoadingView);
+        mLoadAnimImg.setBackgroundResource(R.drawable.loading_animation);
+        mAnimation = (AnimationDrawable) mLoadAnimImg.getBackground();
+        mLoadAnimImg.post(new Runnable() {
+            @Override
+            public void run() {
+                if(mAnimation != null && !mAnimation.isRunning()){
+                    mAnimation.start();            //开始等待动画
+                }
+            }
+        });
+    }
+
     @Override
     public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {
-
+        mAutoTipList.clear();
+        mAutoTipList.addAll(searchAutoTipBean.getBody().getDataList());
+        mAutoTipAdapter.notifyDataSetChanged();
     }
 
     //查询到NewsBean数据后的相关操作
     @Override
     public void applyNewsSubList(NewsBean newsBean) {
+        mHistorySet.add(mKeyword);
+        mSpEditor.putStringSet("history",mHistorySet);
+        mSpEditor.commit();
         subViewShowCtl(mRefreshLv);
         if(lastId.equals("0")){
             newsBeanList.clear();
@@ -250,6 +287,16 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     private void subViewShowCtl(View view){
         switch (view.getId()){
             case R.id.activity_search_page_default_subview:
+                lastId = "0";
+                mHistorySet = mSharedPref.getStringSet("history", null);
+                if(mHistorySet != null){
+                    Log.d("SearchActivity","mHistorySet.size==============="+mHistorySet.size());
+                    mHistoryList.clear();
+                    mHistoryList.addAll(mHistorySet);
+                    historyShowCtrl(mHistoryList.size());           //如果mHistoryList中有数据，则显示History列表
+                    mSearHistoryListAdapter.notifyDataSetChanged();  //刷新历史浏览列表适配器
+                    historyShowCtrl(mHistoryList.size());
+                }
                 mSearchDefPageView.setVisibility(View.VISIBLE);
                 mAutoTipLv.setVisibility(View.GONE);
                 mRefreshLv.setVisibility(View.GONE);
@@ -276,6 +323,7 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         }
     }
 
+    //Hanlder对象
 //    private Handler mHandler = new Handler(){
 //        @Override
 //        public void handleMessage(Message msg) {
