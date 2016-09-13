@@ -4,6 +4,10 @@
         "source": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     },
     {
+        "merged": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_animation.xml",
+        "source": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\loading_animation.xml"
+    },
+    {
         "merged": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_animation.xml",
         "source": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\loading_animation.xml"
     },

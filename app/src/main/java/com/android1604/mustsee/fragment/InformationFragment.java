@@ -31,7 +31,6 @@ import java.util.List;
  */
 public class InformationFragment extends Fragment implements IInformationView {
 
-    private static final String TAG = "zengzhen";
     private IInformationPresenter informationPresenter;
     private TabLayout mTab;
     private ArrayList<String> titleList = new ArrayList<>();
@@ -76,7 +75,6 @@ public class InformationFragment extends Fragment implements IInformationView {
         informationPresenter.getTabTiles();
         informationPresenter.getSearchContent();
         mAdapter.notifyDataSetChanged();
-        Log.d(TAG, "onStart: "+currentItem);
     }
 
     @Override
@@ -108,7 +106,6 @@ public class InformationFragment extends Fragment implements IInformationView {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(data != null){
-            Log.d(TAG, "onActivityResult: ");
             currentItem = data.getIntExtra("current", 0);
         }
     }

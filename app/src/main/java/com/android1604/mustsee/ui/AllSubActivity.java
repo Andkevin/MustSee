@@ -77,8 +77,10 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
         mRightListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(AllSubActivity.this,);
-//                startActivity(intent);
+                String keyword = rightDatas.get(position).getKeyword();
+                Intent intent = new Intent(AllSubActivity.this,ExploreNewsSubActivity.class);
+                intent.putExtra("keyword",keyword);
+                startActivity(intent);
             }
         });
 
