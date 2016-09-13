@@ -1,60 +1,89 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.android1604.mustsee.fragment.ExploreFragment">
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/fragment_explore_list_view_lv"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/fragment_explore_toolbar_tb"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/colorSlightGray"
-        android:dividerHeight="10dp"
-        ptr:ptrListViewExtrasEnabled="true"
-        ptr:ptrAnimationStyle="flip"
-        ptr:ptrDrawable="@drawable/default_ptr_flip1"
-        ptr:ptrMode="both"/>
+        android:layout_height="?actionBarSize"
+        android:background="@color/selectedTextColor">
 
-    <LinearLayout
-        android:id="@+id/fragment_explore_loading_page_layout"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/hotsub_toolbar_keyword_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="探索"
+                android:textColor="@color/colorWhite"
+                android:layout_marginRight="20dp"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="invisible"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/fragment_explore_loading_img_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/fragment_explore_list_view_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/colorSlightGray"
+            android:dividerHeight="10dp"
+            android:headerDividersEnabled="false"
+            android:scrollbars="none"
+            ptr:ptrAnimationStyle="flip"
+            ptr:ptrDrawable="@drawable/default_ptr_flip1"
+            ptr:ptrListViewExtrasEnabled="true"
+            ptr:ptrMode="both"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/custom_loading_logo"/>
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fragment_explore_loading_page_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
-    <LinearLayout
-        android:id="@+id/fragment_explore_network_off_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="invisible">
+            <ImageView
+                android:id="@+id/fragment_explore_loading_img_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/net_error_icon" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/custom_loading_logo" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/net_error_font" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fragment_explore_network_off_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible">
 
-</FrameLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/net_error_icon" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/net_error_font" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
 

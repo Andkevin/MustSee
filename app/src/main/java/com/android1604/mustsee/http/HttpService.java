@@ -8,14 +8,14 @@ import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.bean.PushChannelBean;
+import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchContentBean;
+import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.bean.SortBean;
 import com.android1604.mustsee.bean.StartBean;
 import com.android1604.mustsee.bean.TabTitlesBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -93,16 +93,20 @@ public interface HttpService {
     @POST("/headline/subscribe/channel.sort.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
     Observable<SortBean> sortChannel(@Query("channels")ArrayList<TabTitlesBean.BodyBean.DataListBean> channels);
 
-    //---请求'探索'主页数据---
+    //---请求探索主页数据---
     @GET("/headline/webdata/love.explore.groovy")
     Observable<ExploreInfoBean> queryExploreInfo();
 
     //---查询资讯列表数据---
     @POST("/headline/search/search.content.groovy")
-    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword);
+    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword,@Query("lastId") String lastId);
 
+    //---查询搜索中的热搜数据---
+    @GET("/headline/search/hotsearch.list.groovy")
+    Observable<SearchHotBean> queryHotSearchInfo();
 
-
-
+    //---查询搜索中的关键字自动补全数据---
+    @POST("/headline/recommend/search.enjoy.content.groovy")
+    Observable<SearchAutoTipBean> queryAutoSearchInfo(@Query("keyword") String keyword);
 
 }

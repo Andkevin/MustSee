@@ -109,6 +109,7 @@
         <activity android:name=".ui.ChannelActivity" />
         <activity android:name=".ui.ExploreNewsSubActivity"/>
         <activity android:name=".ui.ChannelActivity"/>
+        <activity android:name=".ui.SearchActivity"/>
     </application>
 
 </manifest>
