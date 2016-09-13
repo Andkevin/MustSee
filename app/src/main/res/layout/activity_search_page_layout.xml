@@ -27,7 +27,15 @@
                 android:id="@+id/activity_search_toolbar_searchbox_actv"
                 android:layout_width="230dp"
                 android:layout_height="50dp"
-                android:drawableLeft="@drawable/icon_title_search"/>
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorSlightGray"
+                android:textCursorDrawable="@color/colorGray"
+                android:textSize="15sp"
+                android:drawableLeft="@drawable/icon_title_search"
+                android:background="@null"
+                android:drawablePadding="5dp"
+                android:imeOptions="actionSearch"/>
 
             <ImageView
                 android:id="@+id/activity_search_toolbar_delete_iv"
