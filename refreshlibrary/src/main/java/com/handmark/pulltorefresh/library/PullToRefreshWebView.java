@@ -101,7 +101,7 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 			webView = new WebView(context, attrs);
 		}
 
-//		webView.setId(R.id.webview);
+		webView.setId(R.id.webview);
 		return webView;
 	}
 
