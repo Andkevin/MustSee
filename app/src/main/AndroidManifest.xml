@@ -107,9 +107,10 @@
         <activity android:name=".StartActivity" />
         <activity android:name=".ui.AllSubActivity" />
         <activity android:name=".ui.ChannelActivity" />
-        <activity android:name=".ui.ExploreNewsSubActivity"/>
-        <activity android:name=".ui.ChannelActivity"/>
-        <activity android:name=".ui.SearchActivity"/>
+        <activity android:name=".ui.ExploreNewsSubActivity" />
+        <activity android:name=".ui.ChannelActivity" />
+        <activity android:name=".ui.SearchActivity" />
+        <activity android:name=".ui.ContentDetailsActivity"></activity>
     </application>
 
 </manifest>

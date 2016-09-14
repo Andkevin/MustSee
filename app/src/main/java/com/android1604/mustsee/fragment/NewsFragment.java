@@ -2,6 +2,7 @@ package com.android1604.mustsee.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.android1604.mustsee.adapter.NewsListAdapter;
 import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.presenter.INewsPresenter;
 import com.android1604.mustsee.presenter.impl.NewsPresenterImpl;
+import com.android1604.mustsee.ui.ContentDetailsActivity;
 import com.android1604.mustsee.view.INewsView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -70,7 +72,12 @@ public class NewsFragment extends Fragment implements INewsView {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO
+                String docType = datas.get(position - 1).getDocType();
+                String docId = datas.get(position - 1).getDocId();
+                Intent intent = new Intent(mContext, ContentDetailsActivity.class);
+                intent.putExtra("docType",docType);
+                intent.putExtra("docId",docId);
+                startActivity(intent);
             }
         });
 
@@ -102,11 +109,6 @@ public class NewsFragment extends Fragment implements INewsView {
         String category = bundle.getString("category", "");
         String keyword = bundle.getString("keyword", "");
         String srpId = bundle.getString("srpId", "");
-        Log.d(TAG, "getDatas: category="+category);
-        Log.d(TAG, "getDatas: keyword="+keyword);
-        Log.d(TAG, "getDatas: srpId="+srpId);
-        Log.d(TAG, "getDatas: indexId="+indexId);
-        Log.d(TAG, "getDatas: lastId="+lastId);
         newsPresenter.getNewsList(category, keyword, srpId, indexId, lastId);
     }
 

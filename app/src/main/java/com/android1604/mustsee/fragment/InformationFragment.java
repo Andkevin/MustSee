@@ -40,7 +40,7 @@ public class InformationFragment extends Fragment implements IInformationView {
     private ViewPager mViewPager;
     private ImageView addChannel;
     private TextView mSearchTxt;
-    private int currentItem = 0;
+    private int currentItem;
 
     public static InformationFragment newInstance() {
         return new InformationFragment();
@@ -75,11 +75,13 @@ public class InformationFragment extends Fragment implements IInformationView {
         informationPresenter.getTabTiles();
         informationPresenter.getSearchContent();
         mAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        currentItem = mViewPager.getCurrentItem();
         titleList.clear();
         fragmentList.clear();
     }
@@ -102,6 +104,7 @@ public class InformationFragment extends Fragment implements IInformationView {
                 mContext.startActivity(intent);
             }
         });
+
     }
 
     @Override

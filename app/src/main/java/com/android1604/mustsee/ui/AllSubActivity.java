@@ -133,6 +133,7 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
                 textView.setBackgroundColor(Color.WHITE);
             }else{
                 textView.setTextColor(Color.BLACK);
+                textView.setBackgroundColor(getResources().getColor(R.color.colorDefaultGray));
             }
             return view;
         }

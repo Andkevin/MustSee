@@ -10,6 +10,7 @@
     <string name="channel_tips">拖动频道可排序</string>
     <string name="channel_manage">管理</string>
     <string name="channel_search">搜索您感兴趣的任意频道</string>
+    <string name="write_comment">写评论...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
