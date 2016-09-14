@@ -35,7 +35,9 @@ import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
+import com.android1604.mustsee.presenter.impl.InformationPresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
+import com.android1604.mustsee.view.IInformationView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -48,7 +50,7 @@ import java.util.Set;
 /**
  * Created by Kevin on 2016/9/10.
  */
-public class SearchActivity  extends BaseActivity implements IExploreView,View.OnClickListener{
+public class SearchActivity  extends BaseActivity implements IExploreView,View.OnClickListener,IInformationView{
     private Context mContext;
     private ExplorePresenterImpl mExplorePresenter;
     private String mKeyword;
@@ -79,10 +81,11 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     private ListView mHistoryLv;
     private SearchHistoryListAdapter mSearHistoryAdapter;
     private SharedPreferences.Editor mSpEditor;
-    private ListView mAutoListLv;
     private List<SearchAutoTipBean.BodyBean.DataListBean> mAutoTipList = new ArrayList<>();
     private SearchAutoListAdapter mAutoTipAdapter;
     private InputMethodManager mInputManager;
+    private ImageView mBackIv;
+    private InformationPresenterImpl mInfoPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,9 +94,18 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         mContext = this;
         mSharedPref = getSharedPreferences("historylist", Context.MODE_PRIVATE);        //创建SharedPreferences对象
         mExplorePresenter = new ExplorePresenterImpl(this);
+        mInfoPresenter = new InformationPresenterImpl(this);
         mKeyword = "test";
         initView();
+        mInfoPresenter.getSearchContent();
         mExplorePresenter.queryHotSearchList();
+    }
+
+    @Override
+    public void getSearchContent(String content) {
+        if(mAutoCompTxt != null){
+            mAutoCompTxt.setHint(content);        //设置自动补全搜索框中的提示文本
+        }
     }
 
     private void initView() {
@@ -107,9 +119,6 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         mClearHistoryTxt.setOnClickListener(this);           //设置清除历史浏览记录监听事件
         mLoadAnimImg = (ImageView)findViewById(R.id.activity_search_page_load_img_iv);
         mAutoCompTxt = (AutoCompleteTextView) findViewById(R.id.activity_search_toolbar_searchbox_actv);
-        if(mAutoCompTxt != null){
-            mAutoCompTxt.setHint("大家都在搜:"+mKeyword);        //设置自动补全搜索框中的提示文本
-        }
         mAutoCompTxt.setOnEditorActionListener(onEditorListener);           //为自动补全搜索框设置键盘按键监听事件
         mAutoCompTxt.addTextChangedListener(mTextWatcher);       //设置搜索框的文本变动监听事件
         mBarDeleIv = (ImageView) findViewById(R.id.activity_search_toolbar_delete_iv);
@@ -124,8 +133,10 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         mHistoryLv.setAdapter(mSearHistoryAdapter);             //为搜索历史记录列表绑定适配器
         mHistoryLv.setOnItemClickListener(mItemListener);
         mAutoTipAdapter = new SearchAutoListAdapter(this,mAutoTipList);
-        mAutoListLv.setAdapter(mAutoTipAdapter);                    //为搜索框的自动关联提示列表绑定适配器
-        mAutoListLv.setOnItemClickListener(mItemListener);          //为搜索框自动关联提示列表的设置item点击事件监听器
+        mAutoTipLv.setAdapter(mAutoTipAdapter);                    //为搜索框的自动关联提示列表绑定适配器
+        mAutoTipLv.setOnItemClickListener(mItemListener);          //为搜索框自动关联提示列表的设置item点击事件监听器
+        mBackIv = (ImageView) findViewById(R.id.activity_search_toolbar_back_iv);
+        mBackIv.setOnClickListener(this);
         subViewShowCtl(mSearchDefPageView);                  //控制显示默认页面
     }
 
@@ -169,10 +180,21 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 subViewShowCtl(mSearchDefPageView);
                 break;
             case R.id.activity_search_def_delhistory_tv:
+                mSpEditor = mSharedPref.edit();
                 mSpEditor.clear();
                 mSpEditor.commit();
                 mHistoryList.clear();
-                historyShowCtrl(mHistoryList.size());
+                historyShowCtrl(mHistoryList.size());           //如果mHistoryList中有数据，则显示History列表
+                if(mSearHistoryAdapter != null){
+                    mSearHistoryAdapter.notifyDataSetChanged();  //刷新历史浏览列表适配器
+                }
+                break;
+            case R.id.activity_search_toolbar_back_iv:
+                if(mSearchDefPageView.getVisibility() != View.VISIBLE){
+                    subViewShowCtl(mSearchDefPageView);
+                }else{
+                    this.finish();
+                }
                 break;
         }
     }
@@ -257,7 +279,7 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
             Log.d("mHistorySet","================================"+mHistorySet.size());
             mSpEditor = mSharedPref.edit();
             mSpEditor.putStringSet("history",mHistorySet);
-            mSpEditor.apply();
+            mSpEditor.commit();
         }
         if(mSearchDefPageView.getVisibility() == View.VISIBLE){
             return;
@@ -381,10 +403,6 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
-//                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                if(inputManager.isActive()){
-//                    inputManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
-//                }
                 closeKeyboard();
                 queryNewSubListFirst(mKeyword);
                 return true;
@@ -406,4 +424,9 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     //不使用
     @Override
     public void applyExploreInfo(ExploreInfoBean exploreInfoBean) {}
+
+    @Override
+    public void refreshTabLayout(Bundle bundle) {}
+
+
 }

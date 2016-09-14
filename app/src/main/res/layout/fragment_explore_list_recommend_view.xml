@@ -23,4 +23,9 @@
         android:spacing="25dp"
         android:descendantFocusability="blocksDescendants"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/colorSlightGray"/>
+
 </LinearLayout>

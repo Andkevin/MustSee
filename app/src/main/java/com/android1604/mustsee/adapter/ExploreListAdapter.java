@@ -114,6 +114,7 @@ public class ExploreListAdapter extends BaseAdapter {
         ListView mLv = (ListView) view.findViewById(R.id.fragment_explore_list_found_item_list_lv);
         ExploreListFoundListAdapter foundAdapter = new ExploreListFoundListAdapter(mContext, bodyBean.getNewFoundList());
         mLv.setAdapter(foundAdapter);
+//        ListViewUtils.reMeasureHeightOnSubList(mLv);
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

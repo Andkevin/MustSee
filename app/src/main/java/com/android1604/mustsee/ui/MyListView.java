@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 /**
  * 自适应高度的ListView
- * Created by my on 2016/9/9.
+ * Created by Kevin on 2016/9/9.
  */
 public class MyListView extends ListView{
     public MyListView(Context context) {
