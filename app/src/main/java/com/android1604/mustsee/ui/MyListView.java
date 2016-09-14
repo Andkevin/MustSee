@@ -5,10 +5,11 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * 自适应高度的ListView
- * Created by Kevin on 2016/9/9.
+ * Created by Kevin on 2016/9/14.
  */
 public class MyListView extends ListView{
+
+
     public MyListView(Context context) {
         super(context);
     }

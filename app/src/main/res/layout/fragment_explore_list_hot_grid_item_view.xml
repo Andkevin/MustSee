@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        android:background="@drawable/corners_bg"/>
+        android:background="@drawable/pic_angle_round_bg"/>
 
     <TextView
         android:id="@+id/fragment_explore_list_hot_grid_item_keyword_tv"

@@ -441,7 +441,7 @@ public class ExploreInfoBean {
 
             public static class FootViewBean {
                 private int commentCount;
-                private String ctime;
+                private long ctime;
                 private int downCount;
                 private int footType;
                 private int isDown;
@@ -456,11 +456,11 @@ public class ExploreInfoBean {
                     this.commentCount = commentCount;
                 }
 
-                public String getCtime() {
+                public long getCtime() {
                     return ctime;
                 }
 
-                public void setCtime(String ctime) {
+                public void setCtime(long ctime) {
                     this.ctime = ctime;
                 }
 

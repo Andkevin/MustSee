@@ -60,7 +60,7 @@ public class ExploreListAdapter extends BaseAdapter {
             setRecommendTypeData(view);
         }
         if(position == 2){
-            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_view, null);
+            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_view,null);
             setFoundTypeData(view);
         }
         return view;
@@ -112,6 +112,7 @@ public class ExploreListAdapter extends BaseAdapter {
 
     public void setFoundTypeData(View view) {
         ListView mLv = (ListView) view.findViewById(R.id.fragment_explore_list_found_item_list_lv);
+        Log.d("|======|","==============="+bodyBean.getNewFoundList().size());
         ExploreListFoundListAdapter foundAdapter = new ExploreListFoundListAdapter(mContext, bodyBean.getNewFoundList());
         mLv.setAdapter(foundAdapter);
 //        ListViewUtils.reMeasureHeightOnSubList(mLv);

@@ -73,8 +73,8 @@ public class ExploreFragment extends Fragment implements IExploreView{
         mPageLoadingView.setVisibility(View.VISIBLE);
         mLoadAnimImg.setBackgroundResource(R.drawable.loading_animation);
         mAnimation = (AnimationDrawable) mLoadAnimImg.getBackground();
-        mExplorePresenter.queryExploreList();
         initContentView(view);
+        mExplorePresenter.queryExploreList();
         return view;
     }
 

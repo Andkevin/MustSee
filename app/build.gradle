@@ -55,7 +55,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile project(':refreshlibrary')
+    //    compile project(':refreshlibrary')
     compile project(':vitamio')
     compile files('libs/MobCommons-2016.0830.1940.jar')
     compile files('libs/MobTools-2016.0830.1940.jar')
@@ -81,4 +81,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile files('libs/BaiduLBS_Android.jar')
     compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile project(':refreshlibrary')
 }
