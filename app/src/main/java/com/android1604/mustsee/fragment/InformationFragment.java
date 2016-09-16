@@ -84,6 +84,7 @@ public class InformationFragment extends Fragment implements IInformationView {
         currentItem = mViewPager.getCurrentItem();
         titleList.clear();
         fragmentList.clear();
+        mAdapter.notifyDataSetChanged();
     }
 
     private void initListener() {

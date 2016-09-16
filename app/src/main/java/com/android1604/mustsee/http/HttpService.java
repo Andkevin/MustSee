@@ -4,6 +4,7 @@ package com.android1604.mustsee.http;
 import com.android1604.mustsee.bean.AddBean;
 import com.android1604.mustsee.bean.AllSubLeftBean;
 import com.android1604.mustsee.bean.AllSubRightBean;
+import com.android1604.mustsee.bean.CommentBean;
 import com.android1604.mustsee.bean.ContentDetailsBean;
 import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
@@ -116,4 +117,9 @@ public interface HttpService {
     @GET("/headline/detail/detail.main.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
     Observable<ContentDetailsBean> getContentDeatils(@Query("docType") String docType,@Query("docId") String docId);
 
+    /**
+     *获取新闻评论
+     */
+    @GET("/headline/comment/comment.list.groovy?appName=com.zhongsou.souyue.headline&netType=WiFi&token=1e9a8a06-beba-4df0-b86d-e1febf178024&imei=133524136259701&state=5&vc=1.2.1&channel=必看豌豆荚&lat=30.578771")
+    Observable<CommentBean> getContentComment(@Query("docType") String docType,@Query("docId") String docId);
 }

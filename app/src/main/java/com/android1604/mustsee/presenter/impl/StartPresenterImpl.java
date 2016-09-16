@@ -1,5 +1,7 @@
 package com.android1604.mustsee.presenter.impl;
 
+import android.text.TextUtils;
+
 import com.android1604.mustsee.bean.StartBean;
 import com.android1604.mustsee.model.IStartModel;
 import com.android1604.mustsee.model.impl.StartModelImpl;
@@ -8,6 +10,7 @@ import com.android1604.mustsee.view.IStartView;
 
 /**
  * Created by Administrator on 2016/9/7.
+ *
  */
 public class StartPresenterImpl implements IStartPresenter, IStartPresenter.StartImageCallBack {
     private IStartView startView;
@@ -30,7 +33,7 @@ public class StartPresenterImpl implements IStartPresenter, IStartPresenter.Star
         if (startBean != null) {
             url = startBean.getBody().getSplashScreen().getUrl();
         }
-        if (url != null) {
+        if (!TextUtils.isEmpty(url)) {
             startView.refreshView(url);
         } else {
             startView.refreshView();

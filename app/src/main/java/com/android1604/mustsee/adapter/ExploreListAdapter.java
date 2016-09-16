@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.ui.ExploreNewsSubActivity;
+import com.android1604.mustsee.ui.MyListView;
 import com.android1604.mustsee.ui.SearchActivity;
 
 import java.util.ArrayList;
@@ -111,7 +112,7 @@ public class ExploreListAdapter extends BaseAdapter {
     }
 
     public void setFoundTypeData(View view) {
-        ListView mLv = (ListView) view.findViewById(R.id.fragment_explore_list_found_item_list_lv);
+        MyListView mLv = (MyListView) view.findViewById(R.id.fragment_explore_list_found_item_list_lv);
         ExploreListFoundListAdapter foundAdapter = new ExploreListFoundListAdapter(mContext, bodyBean.getNewFoundList());
         mLv.setAdapter(foundAdapter);
 //        ListViewUtils.reMeasureHeightOnSubList(mLv);

@@ -203,6 +203,7 @@ public class EasyTipDragView extends RelativeLayout implements AbsChannelAdapter
                         }
                         break;
                 }
+                break;
             case R.id.channel_search_txt:
                 Intent intent = new Intent(mContext, SearchActivity.class);
                 mContext.startActivity(intent);

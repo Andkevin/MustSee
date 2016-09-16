@@ -3,7 +3,6 @@ package com.android1604.mustsee.adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-
-
 /**
  * Created by Administrator on 2016/9/8.
+ *
  */
 public class NewsListAdapter extends BaseAdapter implements View.OnClickListener {
-    private static final String TAG = "zengzhen";
     private List<NewsBean.BodyBean.NewsListBean> newsList;
     private Context mContext;
     public static final int TYPE_VER = 0;
@@ -124,7 +121,6 @@ public class NewsListAdapter extends BaseAdapter implements View.OnClickListener
                 bigTitleTxt.setText(newsList.get(position).getTitle());
                 bigFromTxt.setText(newsList.get(position).getFootView().getSource());
                 if (!TextUtils.isEmpty(newsList.get(position).getBigImgUrl())) {
-                    Log.d(TAG, "getView: " + newsList.get(position).getBigImgUrl()+"ggggg");
                     Picasso.with(mContext).load(newsList.get(position).getBigImgUrl()).into(bigImage);
                 } else {
                     bigImage.setVisibility(View.GONE);
