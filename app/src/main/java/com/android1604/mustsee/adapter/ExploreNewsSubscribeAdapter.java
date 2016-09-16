@@ -22,11 +22,11 @@ import java.util.List;
  */
 public class ExploreNewsSubscribeAdapter extends BaseAdapter {
     private Context mContext;
-    private List<NewsBean1.BodyBean.NewsListBean> newsList = new ArrayList<>();
+    private List<NewsBean1.BodyBean.NewsListBean> newsList;
 
     public ExploreNewsSubscribeAdapter(Context mContext, List<NewsBean1.BodyBean.NewsListBean> newsList) {
         this.mContext = mContext;
-        this.newsList.addAll(newsList);
+        this.newsList = newsList;
     }
 
     @Override

@@ -1,17 +1,5 @@
 [
     {
-        "merged": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_animation.xml",
-        "source": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\loading_animation.xml"
-    },
-    {
-        "merged": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
-        "source": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
-    },
-    {
-        "merged": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
-        "source": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
-    },
-    {
         "merged": "D:\\AndroidStudioWorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
         "source": "D:\\AndroidStudioWorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     },

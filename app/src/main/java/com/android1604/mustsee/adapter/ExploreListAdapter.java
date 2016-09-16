@@ -13,8 +13,10 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
+import com.android1604.mustsee.ui.ContentDetailsActivity;
 import com.android1604.mustsee.ui.ExploreNewsSubActivity;
 import com.android1604.mustsee.ui.SearchActivity;
 
@@ -27,8 +29,10 @@ import java.util.List;
 public class ExploreListAdapter extends BaseAdapter {
     private Context mContext;
     private ExploreInfoBean.BodyBean bodyBean;
+    private int mGridDataGroup = 0;
+    private int mCurGridDataGroup = 0;
 
-    public ExploreListAdapter(Context mContext, ExploreInfoBean.BodyBean bodyBean){
+    public ExploreListAdapter(Context mContext, ExploreInfoBean.BodyBean bodyBean) {
         this.mContext = mContext;
         this.bodyBean = bodyBean;
     }
@@ -51,46 +55,50 @@ public class ExploreListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        if(position == 0){
-            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_hot_view, null);
+        if (position == 0) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_hot_view, null);
             setHotTypeData(view);
         }
-        if(position == 1){
-            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_recommend_view, null);
+        if (position == 1) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_recommend_view, null);
             setRecommendTypeData(view);
         }
-        if(position == 2){
-            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_view,null);
+        if (position == 2) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_view, null);
             setFoundTypeData(view);
         }
         return view;
     }
 
     public void setHotTypeData(View view) {
-        //设置一个标识 flag < listsize
         final List<ExploreInfoBean.BodyBean.HotSubscribeListBean> curGridAdapterList = new ArrayList<>();
+        final List<ExploreInfoBean.BodyBean.HotSubscribeListBean> hotSubscribeList = bodyBean.getHotSubscribeList();
+        mGridDataGroup = hotSubscribeList.size()/4;
+        curGridAdapterList.clear();
         for (int i = 0; i < 4; i++) {
-            curGridAdapterList.add(bodyBean.getHotSubscribeList().get(i));
+            curGridAdapterList.add(hotSubscribeList.get(i));
         }
         TextView batchTxt = (TextView) view.findViewById(R.id.fragment_explore_list_hot_item_change_tv);
         GridView mGv = (GridView) view.findViewById(R.id.fragment_explore_list_hot_item_gridview_gv);
-        final ExploreListHotGridAdapter gridAdapter = new ExploreListHotGridAdapter(mContext,curGridAdapterList);
+        final ExploreListHotGridAdapter gridAdapter = new ExploreListHotGridAdapter(mContext, curGridAdapterList);
         mGv.setAdapter(gridAdapter);
         batchTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "换一批!!!", Toast.LENGTH_SHORT).show();
-//                gridAdapter.notifyDataSetChanged();
-                Intent intent = new Intent(mContext, SearchActivity.class);
-                intent.putExtra("keyword","Hello");
-                mContext.startActivity(intent);
+                mCurGridDataGroup++;
+                mCurGridDataGroup %= mGridDataGroup;
+                curGridAdapterList.clear();
+                for (int i = 0; i < 4; i++) {
+                    curGridAdapterList.add(hotSubscribeList.get(i+mCurGridDataGroup*4));
+                }
+                gridAdapter.notifyDataSetChanged();
             }
         });
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
-                intent.putExtra("keyword",bodyBean.getHotSubscribeList().get(position).getKeyword());
+                intent.putExtra("keyword", curGridAdapterList.get(position).getKeyword());
                 mContext.startActivity(intent);
             }
         });
@@ -104,7 +112,7 @@ public class ExploreListAdapter extends BaseAdapter {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
-                intent.putExtra("keyword",bodyBean.getRecommentList().get(position).getKeyword());
+                intent.putExtra("keyword", bodyBean.getRecommentList().get(position).getKeyword());
                 mContext.startActivity(intent);
             }
         });
@@ -112,22 +120,25 @@ public class ExploreListAdapter extends BaseAdapter {
 
     public void setFoundTypeData(View view) {
         ListView mLv = (ListView) view.findViewById(R.id.fragment_explore_list_found_item_list_lv);
-        Log.d("|======|","==============="+bodyBean.getNewFoundList().size());
         ExploreListFoundListAdapter foundAdapter = new ExploreListFoundListAdapter(mContext, bodyBean.getNewFoundList());
         mLv.setAdapter(foundAdapter);
-//        ListViewUtils.reMeasureHeightOnSubList(mLv);
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
-                int viewID = view.getId();
-                Log.d("ExploreListAdatper", "viewID================================="+viewID);
-                switch (viewID){
-                    case R.layout.fragment_explore_list_found_list_item_type95_view:
-                        Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
-                        intent.putExtra("keyword",bodyBean.getNewFoundList().get(position).getKeyword());
-                        mContext.startActivity(intent);
-                        break;
+                ExploreInfoBean.BodyBean.NewFoundListBean newsObj = bodyBean.getNewFoundList().get(position);
+                int invokeType = newsObj.getInvokeType();
+                String keyword = newsObj.getKeyword();
+                String docId = newsObj.getDocId();
+                String docType = newsObj.getDocType();
+                if (invokeType == 95) {
+                    Intent intent = new Intent(mContext, ExploreNewsSubActivity.class);
+                    intent.putExtra("keyword",keyword);
+                    mContext.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(mContext, ContentDetailsActivity.class);
+                    intent.putExtra("docId", docId);
+                    intent.putExtra("docType", docType);
+                    mContext.startActivity(intent);
                 }
             }
         });

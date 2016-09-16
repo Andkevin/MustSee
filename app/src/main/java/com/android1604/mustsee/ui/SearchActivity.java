@@ -119,6 +119,7 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         mPageLoadingView = (LinearLayout)findViewById(R.id.activity_search_page_load_subview);
         mHistoryListView = (RelativeLayout) findViewById(R.id.activity_search_def_historylist_subview);
 
+        mRefreshLv.setOnItemClickListener(mItemListener);
         mClearHistoryTxt = (TextView) findViewById(R.id.activity_search_def_delhistory_tv);
         mClearHistoryTxt.setOnClickListener(this);           //设置清除历史浏览记录监听事件
         mLoadAnimImg = (ImageView)findViewById(R.id.activity_search_page_load_img_iv);
@@ -226,6 +227,7 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             closeKeyboard();                //收起软键盘
             int parentId = parent.getId();
+            Log.d("parentId","======================parentId"+parentId);
             switch (parentId){
                 //实时热搜榜的Grid适配器item点击事件
                 case R.id.activity_search_default_hotgrid_gd:
@@ -241,6 +243,25 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 case R.id.activity_search_def_historylist_lv:
                     mKeyword = mHistoryList.get(position);
                     queryNewSubListFirst(mKeyword);
+                    break;
+                //搜索资讯标题列表适配器item点击事件--跳转到相关详情Activity页面
+                case R.id.activity_search_page_news_list_subview:
+//                    Log.d("PullList","======================parentId"+parentId);
+//                    String docId = newsBeanList.get(position).getDocId();
+//                    String docType = newsBeanList.get(position).getDocType();
+//                    Log.d("docType","======================docType"+docType);
+//                    Intent intent = new Intent(mContext, ContentDetailsActivity.class);
+//                    intent.putExtra("docId",docId);
+//                    intent.putExtra("docType",docType);
+//                    startActivity(intent);
+                    break;
+                default:
+                    String docId = newsBeanList.get(position-1).getDocId();
+                    String docType = newsBeanList.get(position-1).getDocType();
+                    Intent intent = new Intent(mContext, ContentDetailsActivity.class);
+                    intent.putExtra("docId",docId);
+                    intent.putExtra("docType",docType);
+                    startActivity(intent);
                     break;
             }
         }
@@ -280,7 +301,6 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     public void applyNewsSubList(NewsBean1 newsBean) {
         if(mHistorySet != null){
             mHistorySet.add(mKeyword);
-            Log.d("mHistorySet","================================"+mHistorySet.size());
             mSpEditor = mSharedPref.edit();
             mSpEditor.putStringSet("history",mHistorySet);
             mSpEditor.commit();
@@ -319,7 +339,8 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 refreshView.getLoadingLayoutProxy().setRefreshingLabel("推荐中...");
                 refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
                 refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
-                lastId = newsBeanList.get(newsBeanList.size() - 1).getId();
+                lastId = newsBeanList.get(newsBeanList.size() - 4).getId();
+                Log.d("lastId","================================"+lastId);
                 if(!lastId.equals("0")){
                     mExplorePresenter.queryNewsSubList(mKeyword,lastId);
                 }else{

@@ -99,8 +99,8 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
             mNewsListAdapter.notifyDataSetChanged();
             listRefreshCtrl();
         }else{
-            Log.d("applyNewsSubList","lastIdlastId============================"+lastId);
             newsBeanList.addAll(newsBean.getBody().getNewsList());
+            Log.d("curNewsBeanList","newsBeanList.size()============================"+newsBeanList.size());
             mNewsListAdapter.notifyDataSetChanged();
             mHandler.sendEmptyMessage(LV_REQ_ADDMORE);
         }
@@ -138,8 +138,8 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String docId = newsBeanList.get(position).getDocId();
-            String docType = newsBeanList.get(position).getDocType();
+            String docId = newsBeanList.get(position-1).getDocId();
+            String docType = newsBeanList.get(position-1).getDocType();
             Intent intent = new Intent(mContext, ContentDetailsActivity.class);
             intent.putExtra("docId",docId);
             intent.putExtra("docType",docType);

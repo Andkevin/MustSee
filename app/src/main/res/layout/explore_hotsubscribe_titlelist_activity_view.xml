@@ -46,5 +46,6 @@
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/hotsub_list_view_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scrollbars="none" />
 </LinearLayout>

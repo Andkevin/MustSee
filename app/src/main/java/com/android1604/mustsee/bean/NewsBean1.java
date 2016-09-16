@@ -295,7 +295,7 @@ public class NewsBean1 {
             public static class FootViewBean {
                 private int footType;
                 private String source;
-                private int ctime;
+                private String ctime;
                 private int isDown;
                 private int downCount;
                 private int upCount;
@@ -317,11 +317,11 @@ public class NewsBean1 {
                     this.source = source;
                 }
 
-                public int getCtime() {
+                public String getCtime() {
                     return ctime;
                 }
 
-                public void setCtime(int ctime) {
+                public void setCtime(String ctime) {
                     this.ctime = ctime;
                 }
 

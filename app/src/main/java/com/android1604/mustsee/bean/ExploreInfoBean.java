@@ -313,7 +313,7 @@ public class ExploreInfoBean {
         public static class NewFoundListBean {
             private int invokeType;
             private String docId;
-            private int docType;
+            private String docType;
             /**
              * commentCount : -1
              * ctime : 0
@@ -351,11 +351,11 @@ public class ExploreInfoBean {
                 this.docId = docId;
             }
 
-            public int getDocType() {
+            public String getDocType() {
                 return docType;
             }
 
-            public void setDocType(int docType) {
+            public void setDocType(String docType) {
                 this.docType = docType;
             }
 

@@ -164,6 +164,7 @@ public class ExploreFragment extends Fragment implements IExploreView {
             mLv.setAdapter(mExploreListAdapter);
         }
         mExploreListAdapter.notifyDataSetChanged();
+        mLv.onRefreshComplete();
         mPageLoadingView.setVisibility(View.GONE);
         mHandler.sendEmptyMessage(ANIM_STOP);
     }
@@ -178,7 +179,8 @@ public class ExploreFragment extends Fragment implements IExploreView {
                 refreshView.getLoadingLayoutProxy().setRefreshingLabel("加载中...");
                 refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
                 refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
-                mHandler.sendEmptyMessage(LV_REQ_REFRESH);
+                mExplorePresenter.queryExploreList();
+//                mHandler.sendEmptyMessage(LV_REQ_REFRESH);
             }
 
             @Override
@@ -223,24 +225,13 @@ public class ExploreFragment extends Fragment implements IExploreView {
 
     //无需使用
     @Override
-    public void applyNewsSubList(NewsBean1 newsBean) {
-    }
-
+    public void applyNewsSubList(NewsBean1 newsBean) {}
     @Override
-    public void applyHotSearchList(SearchHotBean searchHotBean) {
-    }
-
+    public void applyHotSearchList(SearchHotBean searchHotBean) {}
     @Override
-    public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {
-    }
-
+    public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {}
     @Override
-    public void applyAddSubscribeInfo(AddBean addBean) {
-
-    }
-
+    public void applyAddSubscribeInfo(AddBean addBean) {}
     @Override
-    public void applyDelSubscribeInfo(DeleteBean deleteBean) {
-
-    }
+    public void applyDelSubscribeInfo(DeleteBean deleteBean) {}
 }
