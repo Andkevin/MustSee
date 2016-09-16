@@ -1,6 +1,7 @@
 package com.android1604.mustsee.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -117,7 +118,12 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //TO-DO
+            String docId = newsBeanList.get(position).getDocId();
+            String docType = newsBeanList.get(position).getDocType();
+            Intent intent = new Intent(mContext, ContentDetailsActivity.class);
+            intent.putExtra("docId",docId);
+            intent.putExtra("docType",docType);
+            startActivity(intent);
         }
     };
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:gravity="center_vertical"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingRight="20dp">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/mine_collect_list_item_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="标题"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/mine_collect_list_item_source_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mine_collect_list_item_title_tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="9dp"
+            android:text="来源"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/mine_collect_list_item_img_iv"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:background="@drawable/default_pic_bg"/>
+
+</LinearLayout>

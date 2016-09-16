@@ -1,6 +1,7 @@
 package com.android1604.mustsee.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.ExploreListAdapter;
 import com.android1604.mustsee.bean.ExploreInfoBean;
@@ -22,6 +24,7 @@ import com.android1604.mustsee.bean.NewsBean;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
+import com.android1604.mustsee.ui.ContentDetailsActivity;
 import com.android1604.mustsee.view.IExploreView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -31,7 +34,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.squareup.picasso.Picasso;
 
-public class ExploreFragment extends Fragment implements IExploreView{
+public class ExploreFragment extends Fragment implements IExploreView {
     private Context mContext;
     private PullToRefreshListView mLv;
     private ExploreInfoBean mExploreInfoBean;
@@ -60,12 +63,12 @@ public class ExploreFragment extends Fragment implements IExploreView{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 //        mNetOffView = (LinearLayout) view.findViewById(R.id.fragment_explore_network_off_layout);
         mPageLoadingView = (LinearLayout) view.findViewById(R.id.fragment_explore_loading_page_layout);
 //        mPageLoadingView.getChildAt(0);
-        mLoadAnimImg = (ImageView)mPageLoadingView.findViewById(R.id.fragment_explore_loading_img_iv);
+        mLoadAnimImg = (ImageView) mPageLoadingView.findViewById(R.id.fragment_explore_loading_img_iv);
 //        if(!HttpUtils.isNetworkAvailable(mContext)){
 //            return view;
 //        }
@@ -73,8 +76,8 @@ public class ExploreFragment extends Fragment implements IExploreView{
         mPageLoadingView.setVisibility(View.VISIBLE);
         mLoadAnimImg.setBackgroundResource(R.drawable.loading_animation);
         mAnimation = (AnimationDrawable) mLoadAnimImg.getBackground();
-        mExplorePresenter.queryExploreList();
         initContentView(view);
+        mExplorePresenter.queryExploreList();
         return view;
     }
 
@@ -85,7 +88,7 @@ public class ExploreFragment extends Fragment implements IExploreView{
         mLoadAnimImg.post(new Runnable() {
             @Override
             public void run() {
-                if(mAnimation != null && !mAnimation.isRunning()){
+                if (mAnimation != null && !mAnimation.isRunning()) {
                     mAnimation.start();
                 }
             }
@@ -96,7 +99,7 @@ public class ExploreFragment extends Fragment implements IExploreView{
      * 初始化ListView的头部Banner
      */
     private void initListHeader() {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_header_view,null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_header_view, null);
         mLv.getRefreshableView().addHeaderView(view);
         mBanner = (ConvenientBanner) view.findViewById(R.id.explore_list_header_banner);
         mBanner.setPages(
@@ -105,25 +108,33 @@ public class ExploreFragment extends Fragment implements IExploreView{
                     public NetImageHolderView createHolder() {
                         return new NetImageHolderView();
                     }
-                },mExploreInfoBean.getBody().getRollingImagesList()
+                }, mExploreInfoBean.getBody().getRollingImagesList()
         ).setPageIndicator(new int[]{R.drawable.banner_indication_focus, R.drawable.banner_indication_unfocus});
 
         mBanner.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(mContext, "这是Banner的item点击事件", Toast.LENGTH_SHORT).show();
+                ExploreInfoBean.BodyBean.RollingImagesListBean bannerItemObj = mExploreInfoBean.getBody().getRollingImagesList().get(position);
+                String docId = bannerItemObj.getDocId();
+                String docType = bannerItemObj.getDocType();
+                Intent intent = new Intent(mContext, ContentDetailsActivity.class);
+                intent.putExtra("docId", docId);
+                intent.putExtra("docType", docType);
+                startActivity(intent);
             }
         });
     }
+
     /**
      * Banner需要使用的HolderView类
      */
-    public class NetImageHolderView implements Holder<ExploreInfoBean.BodyBean.RollingImagesListBean>{
+    public class NetImageHolderView implements Holder<ExploreInfoBean.BodyBean.RollingImagesListBean> {
         private TextView titleTxt;
         private ImageView imgView;
+
         @Override
         public View createView(Context context) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_header_item_view,null);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_header_item_view, null);
             titleTxt = (TextView) view.findViewById(R.id.explore_list_header_item_title_tv);
             imgView = (ImageView) view.findViewById(R.id.explore_list_header_item_img_iv);
             return view;
@@ -144,7 +155,7 @@ public class ExploreFragment extends Fragment implements IExploreView{
     @Override
     public void applyExploreInfo(ExploreInfoBean exploreInfoBean) {
         mExploreInfoBean = exploreInfoBean;
-        if(mExploreListAdapter == null){
+        if (mExploreListAdapter == null) {
             mExploreListAdapter = new ExploreListAdapter(mContext, mExploreInfoBean.getBody());
             initListHeader();               //初始化ExpandListView的头部
             mLv.setAdapter(mExploreListAdapter);
@@ -174,10 +185,10 @@ public class ExploreFragment extends Fragment implements IExploreView{
         });
     }
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case LV_REQ_REFRESH:
                     mLv.onRefreshComplete();
                     //更新适配器
@@ -192,7 +203,7 @@ public class ExploreFragment extends Fragment implements IExploreView{
     @Override
     public void onStart() {
         super.onStart();
-        if(mBanner != null){
+        if (mBanner != null) {
             mBanner.setCanLoop(true);
             mBanner.setScrollDuration(3000);
             mBanner.startTurning(4000);
@@ -202,16 +213,21 @@ public class ExploreFragment extends Fragment implements IExploreView{
     @Override
     public void onStop() {
         super.onStop();
-        if(mBanner != null){
+        if (mBanner != null) {
             mBanner.stopTurning();
         }
     }
 
     //无需使用
     @Override
-    public void applyNewsSubList(NewsBean newsBean) {}
+    public void applyNewsSubList(NewsBean newsBean) {
+    }
+
     @Override
-    public void applyHotSearchList(SearchHotBean searchHotBean) {}
+    public void applyHotSearchList(SearchHotBean searchHotBean) {
+    }
+
     @Override
-    public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {}
+    public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {
+    }
 }

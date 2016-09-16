@@ -1,9 +1,5 @@
 [
     {
-        "merged": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
-        "source": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
-    },
-    {
         "merged": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
         "source": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
     },
@@ -20,16 +16,8 @@
         "source": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
     },
     {
-        "merged": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
-        "source": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
-    },
-    {
         "merged": "D:\\AndroidStudioWorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
         "source": "D:\\AndroidStudioWorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
-    },
-    {
-        "merged": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
-        "source": "E:\\AndroidTest\\MustSee\\refreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
     },
     {
         "merged": "D:\\AndroidStudio\\WorkSpace\\MustSee\\refreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",

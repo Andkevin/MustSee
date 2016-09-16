@@ -13,6 +13,7 @@ import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,11 +21,11 @@ import java.util.List;
  */
 public class ExploreListFoundListAdapter extends BaseAdapter {
     private Context mContext;
-    private List<ExploreInfoBean.BodyBean.NewFoundListBean> newFoundList;
+    private List<ExploreInfoBean.BodyBean.NewFoundListBean> newFoundList = new ArrayList<>();
 
     public ExploreListFoundListAdapter(Context mContext, List<ExploreInfoBean.BodyBean.NewFoundListBean> newFoundList){
         this.mContext = mContext;
-        this.newFoundList = newFoundList;
+        this.newFoundList.addAll(newFoundList);
     }
 
     @Override

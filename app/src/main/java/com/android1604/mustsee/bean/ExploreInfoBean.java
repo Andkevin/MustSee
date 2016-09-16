@@ -441,7 +441,7 @@ public class ExploreInfoBean {
 
             public static class FootViewBean {
                 private int commentCount;
-                private String ctime;
+                private long ctime;
                 private int downCount;
                 private int footType;
                 private int isDown;
@@ -456,11 +456,11 @@ public class ExploreInfoBean {
                     this.commentCount = commentCount;
                 }
 
-                public String getCtime() {
+                public long getCtime() {
                     return ctime;
                 }
 
-                public void setCtime(String ctime) {
+                public void setCtime(long ctime) {
                     this.ctime = ctime;
                 }
 
@@ -509,7 +509,7 @@ public class ExploreInfoBean {
         public static class RollingImagesListBean {
             private int invokeType;
             private String docId;
-            private int docType;
+            private String docType;
             private String srpId;
             private String imageUrl;
             private int countSubscribe;
@@ -533,11 +533,11 @@ public class ExploreInfoBean {
                 this.docId = docId;
             }
 
-            public int getDocType() {
+            public String getDocType() {
                 return docType;
             }
 
-            public void setDocType(int docType) {
+            public void setDocType(String docType) {
                 this.docType = docType;
             }
 

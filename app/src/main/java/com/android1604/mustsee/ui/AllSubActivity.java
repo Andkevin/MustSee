@@ -86,7 +86,6 @@ public class AllSubActivity extends BaseActivity implements IAllSubView{
 
     }
 
-
     @Override
     public void refreshLeftList(List<AllSubLeftBean.BodyBean.DataListBean> leftDataList) {
         leftDatas.addAll(leftDataList);
