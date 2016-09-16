@@ -34,6 +34,7 @@ public class ContentDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_details);
+        ShareSDK.initSDK(this);
         Intent intent = getIntent();
         docType = intent.getStringExtra("docType");
         docId = intent.getStringExtra("docId");

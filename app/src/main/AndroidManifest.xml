@@ -70,7 +70,7 @@
 
             <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
-                <data android:scheme="tencent1105606099" />
+                <data android:scheme="tecent1105606099" />
 
                 <action android:name="android.intent.action.VIEW" />
 
