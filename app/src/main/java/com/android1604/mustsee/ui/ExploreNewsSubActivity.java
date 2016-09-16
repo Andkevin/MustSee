@@ -15,11 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android1604.mustsee.BaseActivity;
 import com.android1604.mustsee.R;
+import com.android1604.mustsee.adapter.ExploreNewsSubscribeAdapter;
 import com.android1604.mustsee.adapter.NewsListAdapter;
+import com.android1604.mustsee.bean.AddBean;
+import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
+import com.android1604.mustsee.presenter.impl.AllSubPresenterImpl;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
 import com.android1604.mustsee.view.IExploreView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -38,10 +43,12 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
     private String mKeyword;
     private ImageView mBackImgView;
     private TextView mKeywordTxt;
-    private NewsListAdapter mNewsListAdapter;
-    private List<NewsBean.BodyBean.NewsListBean> newsBeanList = new ArrayList<>();
+    private ExploreNewsSubscribeAdapter mNewsListAdapter;
+    private List<NewsBean1.BodyBean.NewsListBean> newsBeanList = new ArrayList<>();
     public static final int LV_REQ_ADDMORE = 0;
     private String lastId = "0";
+    private int mSubStatus = -1;
+    private String mSrpId = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,16 +76,30 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
         mRefreshLv.setOnItemClickListener(itemClickListener);
     }
 
+    //设置订阅状态
+    private void setSubStatus(int subStatus){
+        if(subStatus == 1){
+            mSubscribeTxt.setText("退订");
+        }else{
+            mSubscribeTxt.setText("订阅");
+        }
+    }
+
     @Override
-    public void applyNewsSubList(NewsBean newsBean) {
+    public void applyNewsSubList(NewsBean1 newsBean) {
         if(lastId.equals("0")){
+            mSubStatus = newsBean.getBody().getSrpInfo().getSubscribe();
+            setSubStatus(mSubStatus);                            //设置订阅状态
+            mSrpId = newsBean.getBody().getSrpInfo().getSrpId();
             newsBeanList.clear();
             newsBeanList.addAll(newsBean.getBody().getNewsList());
-            mNewsListAdapter = new NewsListAdapter(this, newsBeanList);
+//            mNewsListAdapter = new NewsListAdapter(this, newsBeanList);
+            mNewsListAdapter = new ExploreNewsSubscribeAdapter(this, newsBeanList);
             mRefreshLv.setAdapter(mNewsListAdapter);
             mNewsListAdapter.notifyDataSetChanged();
             listRefreshCtrl();
         }else{
+            Log.d("applyNewsSubList","lastIdlastId============================"+lastId);
             newsBeanList.addAll(newsBean.getBody().getNewsList());
             mNewsListAdapter.notifyDataSetChanged();
             mHandler.sendEmptyMessage(LV_REQ_ADDMORE);
@@ -100,8 +121,8 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
                 refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
                 refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
                 lastId = newsBeanList.get(newsBeanList.size() - 1).getId();
-                Log.d("lastIdlastId","============================"+lastId);
                 if(!lastId.equals("0")){
+                    Log.d("lastIdlastId","============================"+lastId);
                     mExplorePresenter.queryNewsSubList(mKeyword,lastId);
                 }else{
                     Toast.makeText(mContext, "lastId无效!!!", Toast.LENGTH_SHORT).show();
@@ -133,8 +154,12 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
                 String subCurText = mSubscribeTxt.getText().toString();
                 if (subCurText.equals("订阅")) {
                     mSubscribeTxt.setText("退订");
+                    mExplorePresenter.addSubscribe(mKeyword,mSrpId);
+//                    AllSubPresenterImpl.subDeleteChannel("",mKeyword,mSrpId);
                 } else {
                     mSubscribeTxt.setText("订阅");
+                    mExplorePresenter.delSubscribe(mKeyword,mSrpId);
+//                    AllSubPresenterImpl.subAddChannel("", mKeyword,mSrpId);
                 }
                 break;
             case R.id.hotsub_toolbar_back_iv:
@@ -161,5 +186,9 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
     public void applyHotSearchList(SearchHotBean searchHotBean) {}
     @Override
     public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {}
+    @Override
+    public void applyAddSubscribeInfo(AddBean addBean) {}
+    @Override
+    public void applyDelSubscribeInfo(DeleteBean deleteBean) {}
 
 }

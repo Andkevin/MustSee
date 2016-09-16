@@ -26,12 +26,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android1604.mustsee.BaseActivity;
 import com.android1604.mustsee.R;
+import com.android1604.mustsee.adapter.ExploreNewsSubscribeAdapter;
 import com.android1604.mustsee.adapter.NewsListAdapter;
 import com.android1604.mustsee.adapter.SearchAutoListAdapter;
 import com.android1604.mustsee.adapter.SearchHistoryListAdapter;
 import com.android1604.mustsee.adapter.SearchHotGridAdapter;
+import com.android1604.mustsee.bean.AddBean;
+import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
@@ -68,8 +72,8 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     private ImageView mLoadAnimImg;
     private AnimationDrawable mAnimation;
     private String lastId = "0";
-    private NewsListAdapter mNewsListAdapter;
-    private List<NewsBean.BodyBean.NewsListBean> newsBeanList = new ArrayList<>();
+    private ExploreNewsSubscribeAdapter mNewsListAdapter;
+    private List<NewsBean1.BodyBean.NewsListBean> newsBeanList = new ArrayList<>();
     public static final int LV_REQ_ADDMORE = 0;
     private LinearLayout mSearchDefPageView;
     private ListView mAutoTipLv;
@@ -273,7 +277,7 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
 
     //查询到NewsBean数据后的相关操作
     @Override
-    public void applyNewsSubList(NewsBean newsBean) {
+    public void applyNewsSubList(NewsBean1 newsBean) {
         if(mHistorySet != null){
             mHistorySet.add(mKeyword);
             Log.d("mHistorySet","================================"+mHistorySet.size());
@@ -288,7 +292,8 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         if(lastId.equals("0")){
             newsBeanList.clear();
             newsBeanList.addAll(newsBean.getBody().getNewsList());
-            mNewsListAdapter = new NewsListAdapter(this, newsBeanList);
+//            mNewsListAdapter = new NewsListAdapter(this, newsBeanList);
+            mNewsListAdapter = new ExploreNewsSubscribeAdapter(this, newsBeanList);
             mRefreshLv.setAdapter(mNewsListAdapter);
             mNewsListAdapter.notifyDataSetChanged();
             listRefreshCtrl();
@@ -424,9 +429,10 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
     //不使用
     @Override
     public void applyExploreInfo(ExploreInfoBean exploreInfoBean) {}
-
     @Override
     public void refreshTabLayout(Bundle bundle) {}
-
-
+    @Override
+    public void applyAddSubscribeInfo(AddBean addBean) {}
+    @Override
+    public void applyDelSubscribeInfo(DeleteBean deleteBean) {}
 }

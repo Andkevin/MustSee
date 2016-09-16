@@ -1,7 +1,10 @@
 package com.android1604.mustsee.model.impl;
 
+import com.android1604.mustsee.bean.AddBean;
+import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.http.HttpUtils;
@@ -32,9 +35,9 @@ public class ExploreModelImpl implements IExploreModel {
     public void queryNewsSubList(String keyword, String lastId, final IExplorePresenter.NewsSubListCallback newsSubListCallback) {
         HttpUtils.getHttpService().queryNewsSubList(keyword, lastId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<NewsBean>() {
+                .subscribe(new Action1<NewsBean1>() {
                     @Override
-                    public void call(NewsBean newsBean) {
+                    public void call(NewsBean1 newsBean) {
                         newsSubListCallback.newsSubListOK(newsBean);
                     }
                 });
@@ -60,6 +63,32 @@ public class ExploreModelImpl implements IExploreModel {
                     @Override
                     public void call(SearchAutoTipBean searchAutoTipBean) {
                         autoSearchListCallback.autoSearchListOK(searchAutoTipBean);
+                    }
+                });
+    }
+
+    //探索添加订阅
+    @Override
+    public void addSubscribe(String keyword, String srpId, final IExplorePresenter.SubScribeCallback subScribeCallback) {
+        HttpUtils.getHttpService().addSubscribe(keyword,srpId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<AddBean>() {
+                    @Override
+                    public void call(AddBean addBean) {
+                        subScribeCallback.addSubscribeOK(addBean);
+                    }
+                });
+    }
+
+    //探索取消订阅
+    @Override
+    public void delSubscribe(String keyword, String srpId, final IExplorePresenter.SubScribeCallback subScribeCallback) {
+        HttpUtils.getHttpService().delSubscribe(keyword,srpId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<DeleteBean>() {
+                    @Override
+                    public void call(DeleteBean deleteBean) {
+                        subScribeCallback.delSubscribeOK(deleteBean);
                     }
                 });
     }

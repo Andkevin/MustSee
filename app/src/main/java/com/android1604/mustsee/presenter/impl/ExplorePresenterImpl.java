@@ -1,7 +1,10 @@
 package com.android1604.mustsee.presenter.impl;
 
+import com.android1604.mustsee.bean.AddBean;
+import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.model.impl.ExploreModelImpl;
@@ -12,7 +15,7 @@ import com.android1604.mustsee.view.IExploreView;
 /**
  * Created by Kevin on 2016/9/6.
  */
-public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresenter.ExploreInfoCallback,IExplorePresenter.NewsSubListCallback,IExplorePresenter.HotSearchListCallback,IExplorePresenter.AutoSearchListCallback{
+public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresenter.ExploreInfoCallback,IExplorePresenter.NewsSubListCallback,IExplorePresenter.HotSearchListCallback,IExplorePresenter.AutoSearchListCallback, IExplorePresenter.SubScribeCallback{
 
     IExploreModel mExploreModel;
     IExploreView mExploreView;
@@ -46,6 +49,18 @@ public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresente
         mExploreModel.queryAutoSearchList(keyword,this);
     }
 
+    //探索添加订阅
+    @Override
+    public void addSubscribe(String keyword, String srpId) {
+        mExploreModel.addSubscribe(keyword,srpId,this);
+    }
+
+    //探索取消订阅
+    @Override
+    public void delSubscribe(String keyword, String srpId) {
+        mExploreModel.delSubscribe(keyword,srpId,this);
+    }
+
     //获取到探索界面列表信息后的接口回调行为
     @Override
     public void exploreInfoOK(ExploreInfoBean exploreInfoBean) {
@@ -54,7 +69,7 @@ public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresente
 
     //获取到资讯订阅列表信息后的接口回调行为
     @Override
-    public void newsSubListOK(NewsBean newsBean) {
+    public void newsSubListOK(NewsBean1 newsBean) {
         mExploreView.applyNewsSubList(newsBean);
     }
 
@@ -68,5 +83,17 @@ public class ExplorePresenterImpl implements IExplorePresenter, IExplorePresente
     @Override
     public void hotSearchListOK(SearchHotBean searchHotBean) {
          mExploreView.applyHotSearchList(searchHotBean);
+    }
+
+    //获取到添加订阅操作后相关数据的接口回调行为
+    @Override
+    public void addSubscribeOK(AddBean addBean) {
+        mExploreView.applyAddSubscribeInfo(addBean);
+    }
+
+    //获取到取消订阅操作后相关数据的接口回调行为
+    @Override
+    public void delSubscribeOK(DeleteBean deleteBean) {
+        mExploreView.applyDelSubscribeInfo(deleteBean);
     }
 }

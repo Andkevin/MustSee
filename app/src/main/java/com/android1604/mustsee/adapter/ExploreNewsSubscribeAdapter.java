@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,11 +22,11 @@ import java.util.List;
  */
 public class ExploreNewsSubscribeAdapter extends BaseAdapter {
     private Context mContext;
-    private List<ExploreSubscribeBean.BodyBean.NewsListBean> newsList = new ArrayList<>();
+    private List<NewsBean1.BodyBean.NewsListBean> newsList = new ArrayList<>();
 
-    public ExploreNewsSubscribeAdapter(Context mContext, ExploreSubscribeBean exploreSubscribeBean) {
+    public ExploreNewsSubscribeAdapter(Context mContext, List<NewsBean1.BodyBean.NewsListBean> newsList) {
         this.mContext = mContext;
-        this.newsList.addAll(exploreSubscribeBean.getBody().getNewsList());
+        this.newsList.addAll(newsList);
     }
 
     @Override
@@ -62,7 +63,8 @@ public class ExploreNewsSubscribeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ExploreSubscribeBean.BodyBean.NewsListBean newsBeen = newsList.get(position);
+//        ExploreSubscribeBean.BodyBean.NewsListBean newsBeen = newsList.get(position);
+        NewsBean1.BodyBean.NewsListBean newsBeen = newsList.get(position);
         int viewType = getItemViewType(position);
         View view = null;
         if (viewType == 0) {

@@ -81,39 +81,19 @@ public class ExploreListFoundListAdapter extends BaseAdapter {
             readCountTxt.setText(String.valueOf(foundObj.getCountSubscribe())+"人已订阅");
             Picasso.with(mContext).load(foundObj.getImageUrl()).into(imgView);
         }
-//        if(viewType == 1 || viewType == 2){
-//            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_list_item_type10_1_view, null);
-//            TextView titleTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_title_tv);
-//            TextView sourceTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_source_tv);
-//            ImageView imgView = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type10_1_iv);
-//            titleTxt.setText(foundObj.getTitle());
-//            sourceTxt.setText(foundObj.getFootView().getSource());
-//            if(viewType == 1){
-//                imgView.setVisibility(View.GONE);
-//            }else {
-//                Picasso.with(mContext).load(foundObj.getImage().get(0)).into(imgView);
-//            }
-//        }
 
-        if(viewType == 1){
+        if(viewType == 1 || viewType == 2){
             view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_list_item_type10_1_view, null);
             TextView titleTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_title_tv);
             TextView sourceTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_source_tv);
             ImageView imgView = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type10_1_iv);
             titleTxt.setText(foundObj.getTitle());
             sourceTxt.setText(foundObj.getFootView().getSource());
-            imgView.setVisibility(View.GONE);
-
-        }
-
-        if(viewType == 2){
-            view  = LayoutInflater.from(mContext).inflate(R.layout.fragment_explore_list_found_list_item_type10_1_view, null);
-            TextView titleTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_title_tv);
-            TextView sourceTxt = (TextView) view.findViewById(R.id.explore_list_found_list_item_type10_1_source_tv);
-            ImageView imgView = (ImageView) view.findViewById(R.id.explore_list_found_list_item_type10_1_iv);
-            titleTxt.setText(foundObj.getTitle());
-            sourceTxt.setText(foundObj.getFootView().getSource());
-            Picasso.with(mContext).load(foundObj.getImage().get(0)).into(imgView);
+            if(viewType == 1){
+                imgView.setVisibility(View.GONE);
+            }else {
+                Picasso.with(mContext).load(foundObj.getImage().get(0)).into(imgView);
+            }
         }
 
         if(viewType == 3){

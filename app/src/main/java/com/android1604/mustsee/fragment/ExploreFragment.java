@@ -19,8 +19,11 @@ import android.widget.Toast;
 
 import com.android1604.mustsee.R;
 import com.android1604.mustsee.adapter.ExploreListAdapter;
+import com.android1604.mustsee.bean.AddBean;
+import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreInfoBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchHotBean;
 import com.android1604.mustsee.presenter.impl.ExplorePresenterImpl;
@@ -220,7 +223,7 @@ public class ExploreFragment extends Fragment implements IExploreView {
 
     //无需使用
     @Override
-    public void applyNewsSubList(NewsBean newsBean) {
+    public void applyNewsSubList(NewsBean1 newsBean) {
     }
 
     @Override
@@ -229,5 +232,15 @@ public class ExploreFragment extends Fragment implements IExploreView {
 
     @Override
     public void applyAutoSearchList(SearchAutoTipBean searchAutoTipBean) {
+    }
+
+    @Override
+    public void applyAddSubscribeInfo(AddBean addBean) {
+
+    }
+
+    @Override
+    public void applyDelSubscribeInfo(DeleteBean deleteBean) {
+
     }
 }

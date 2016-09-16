@@ -8,6 +8,7 @@ import com.android1604.mustsee.bean.ContentDetailsBean;
 import com.android1604.mustsee.bean.DeleteBean;
 import com.android1604.mustsee.bean.ExploreSubscribeBean;
 import com.android1604.mustsee.bean.NewsBean;
+import com.android1604.mustsee.bean.NewsBean1;
 import com.android1604.mustsee.bean.PushChannelBean;
 import com.android1604.mustsee.bean.SearchAutoTipBean;
 import com.android1604.mustsee.bean.SearchContentBean;
@@ -99,8 +100,9 @@ public interface HttpService {
     Observable<ExploreInfoBean> queryExploreInfo();
 
     //---查询资讯列表数据---
-    @POST("/headline/search/search.content.groovy")
-    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword,@Query("lastId") String lastId);
+    @POST("/headline/search/search.content.groovy?token=69fa71a1-d825-446a-8eb0-3baecb4b3d24")
+    Observable<NewsBean1> queryNewsSubList(@Query("keyword") String keyword, @Query("lastId") String lastId);
+//    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword,@Query("lastId") String lastId);
 
     //---查询搜索中的热搜数据---
     @GET("/headline/search/hotsearch.list.groovy")
@@ -109,6 +111,14 @@ public interface HttpService {
     //---查询搜索中的关键字自动补全数据---
     @POST("/headline/recommend/search.enjoy.content.groovy")
     Observable<SearchAutoTipBean> queryAutoSearchInfo(@Query("keyword") String keyword);
+
+    //探索添加订阅
+    @POST("/headline/subscribe/subscribe.channel.add.groovy?token=69fa71a1-d825-446a-8eb0-3baecb4b3d24&category=\"\"")
+    Observable<AddBean> addSubscribe(@Query("keyword") String keyword, @Query("srpId") String srpId);
+
+    //探索取消订阅
+    @POST("/headline/subscribe/subscribe.channel.delete.groovy?token=69fa71a1-d825-446a-8eb0-3baecb4b3d24")
+    Observable<DeleteBean> delSubscribe(@Query("keyword") String keyword, @Query("srpId") String srpId);
 
     /**
      * 获取新闻详情

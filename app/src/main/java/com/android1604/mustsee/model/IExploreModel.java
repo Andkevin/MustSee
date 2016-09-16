@@ -18,4 +18,10 @@ public interface IExploreModel {
 
     //查询搜索中的关键字自动补全数据
     void queryAutoSearchList(String keyword, IExplorePresenter.AutoSearchListCallback autoSearchListCallback);
+
+    //探索添加订阅
+    void addSubscribe(String keyword,String srpId,IExplorePresenter.SubScribeCallback subScribeCallback);
+
+    //探索取消订阅
+    void delSubscribe(String keyword,String srpId,IExplorePresenter.SubScribeCallback subScribeCallback);
 }
