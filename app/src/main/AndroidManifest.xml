@@ -36,7 +36,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,7 +70,7 @@
 
             <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
-                <data android:scheme="tencent100371282" />
+                <data android:scheme="tecent1105606099" />
 
                 <action android:name="android.intent.action.VIEW" />
 
@@ -104,7 +104,7 @@
             android:value="4BmUpwg3wGyDtaIypCongiZ0N1lqiu7F" />
         //key:开发者申请的key
         <!-- baidu end -->
-        <activity android:name=".StartActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.AllSubActivity" />
         <activity android:name=".ui.ChannelActivity" />
         <activity android:name=".ui.ExploreNewsSubActivity" />

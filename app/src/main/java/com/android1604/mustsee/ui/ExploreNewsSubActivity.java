@@ -34,6 +34,7 @@ import java.util.List;
 
 /**
  * Created by my on 2016/9/8.
+ *
  */
 public class ExploreNewsSubActivity extends BaseActivity implements IExploreView, View.OnClickListener {
     private Context mContext;
