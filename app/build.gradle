@@ -50,6 +50,11 @@ android {
             manifestPlaceholders = [CHANNEL: "meizu"];
         }
     }
+
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -82,3 +87,4 @@ dependencies {
     compile files('libs/BaiduLBS_Android.jar')
     compile 'com.bigkoo:convenientbanner:2.0.5'
 }
+

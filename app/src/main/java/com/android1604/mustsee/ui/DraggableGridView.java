@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
@@ -62,6 +63,7 @@ public class DraggableGridView extends ViewGroup implements View.OnTouchListener
     	secondaryOnClickListener = l;
     }
     protected Runnable updateTask = new Runnable() {
+        @SuppressLint("WrongCall")
         public void run()
         {
             if (dragged != -1)
@@ -220,6 +222,7 @@ public class DraggableGridView extends ViewGroup implements View.OnTouchListener
         }
         return false;
     }
+    @SuppressLint("WrongCall")
     public boolean onTouch(View view, MotionEvent event)
     {
         int action = event.getAction();
@@ -346,6 +349,7 @@ public class DraggableGridView extends ViewGroup implements View.OnTouchListener
 			newPositions.set(i, newPos);
     	}
     }
+    @SuppressLint("WrongCall")
     protected void reorderChildren()
     {
         //FIGURE OUT HOW TO REORDER CHILDREN WITHOUT REMOVING THEM ALL AND RECONSTRUCTING THE LIST!!!
