@@ -6,6 +6,7 @@
     android:padding="10dp">
 
 
+
     <ImageView
         android:id="@+id/explore_list_found_list_item_type95_iv"
         android:layout_width="60dp"
@@ -39,8 +40,9 @@
         android:layout_height="35dp"
         android:text="查看"
         android:layout_alignParentRight="true"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:gravity="center"
+        android:background="@drawable/button_stroke_bg"
         android:layout_centerVertical="true"/>
 
 </RelativeLayout>

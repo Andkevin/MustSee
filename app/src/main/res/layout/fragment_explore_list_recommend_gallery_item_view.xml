@@ -2,21 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="260dp"
     android:layout_height="180dp"
-    android:background="@color/colorWhite"
     android:padding="5dp">
 
     <ImageView
         android:id="@+id/explore_list_recommend_gallery_item_img_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:alpha="40"
         android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorTranslucentBalck"
         android:paddingLeft="10dp">
 
         <TextView

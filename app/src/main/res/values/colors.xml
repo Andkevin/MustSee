@@ -14,5 +14,6 @@
     <color name="colorSlightGray">#80C3C3C3</color>
     <color name="colorDefaultGray">#F2F2F2</color>
     <color name="colorSlightRed">#F8362C</color>
+    <color name="colorSlightGreen">#00FFFF</color>
 
 </resources>
