@@ -101,7 +101,6 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
             listRefreshCtrl();
         }else{
             newsBeanList.addAll(newsBean.getBody().getNewsList());
-            Log.d("curNewsBeanList","newsBeanList.size()============================"+newsBeanList.size());
             mNewsListAdapter.notifyDataSetChanged();
             mHandler.sendEmptyMessage(LV_REQ_ADDMORE);
         }
@@ -123,7 +122,6 @@ public class ExploreNewsSubActivity extends BaseActivity implements IExploreView
                 refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
                 lastId = newsBeanList.get(newsBeanList.size() - 1).getId();
                 if(!lastId.equals("0")){
-                    Log.d("lastIdlastId","============================"+lastId);
                     mExplorePresenter.queryNewsSubList(mKeyword,lastId);
                 }else{
                     Toast.makeText(mContext, "lastId无效!!!", Toast.LENGTH_SHORT).show();
