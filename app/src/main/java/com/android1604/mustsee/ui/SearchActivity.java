@@ -227,7 +227,6 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             closeKeyboard();                //收起软键盘
             int parentId = parent.getId();
-            Log.d("parentId","======================parentId"+parentId);
             switch (parentId){
                 //实时热搜榜的Grid适配器item点击事件
                 case R.id.activity_search_default_hotgrid_gd:
@@ -340,7 +339,6 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 refreshView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
                 refreshView.getLoadingLayoutProxy().setReleaseLabel("松手刷新");
                 lastId = newsBeanList.get(newsBeanList.size() - 4).getId();
-                Log.d("lastId","================================"+lastId);
                 if(!lastId.equals("0")){
                     mExplorePresenter.queryNewsSubList(mKeyword,lastId);
                 }else{
@@ -357,15 +355,12 @@ public class SearchActivity  extends BaseActivity implements IExploreView,View.O
                 lastId = "0";
                 Set<String> storeSet = mSharedPref.getStringSet("history", null);
                 if(storeSet != null && storeSet.size() > 0){
-                    Log.d("SearchActivity","mHistorySet.size==============="+storeSet.size());
                     Iterator<String> iterator = storeSet.iterator();
                     mHistoryList.clear();
                     while (iterator.hasNext()){
                         mHistoryList.add(iterator.next());
                     }
-                    for (int i = 0; i < mHistoryList.size(); i++) {
-                        Log.d("SearchActivity","mHistoryList==============="+mHistoryList.get(i));
-                    }
+
                     historyShowCtrl(mHistoryList.size());           //如果mHistoryList中有数据，则显示History列表
                     if(mSearHistoryAdapter != null){
                         mSearHistoryAdapter.notifyDataSetChanged();  //刷新历史浏览列表适配器
