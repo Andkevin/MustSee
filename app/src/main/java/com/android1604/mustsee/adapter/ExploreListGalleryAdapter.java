@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android1604.mustsee.R;
@@ -26,18 +27,22 @@ public class ExploreListGalleryAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return recommentList == null ? 0 : recommentList.size();
+//        return recommentList == null ? 0 : recommentList.size();
+        return Integer.MAX_VALUE;
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+//        return null;
+        return position;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+//        return 0;
+        return position;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -49,7 +54,14 @@ public class ExploreListGalleryAdapter extends BaseAdapter {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
         myViewHolder.imgView.setImageResource(R.mipmap.ic_launcher);
-        ExploreInfoBean.BodyBean.RecommentListBean recommentObj = recommentList.get(position);
+        myViewHolder.imgView.setAlpha(100);
+        myViewHolder.imgView.setPadding(10,10,10,10);
+        if(position < 0){
+            position = position + recommentList.size();
+        }
+//        myViewHolder.imgView.setLayoutParams(new Gallery.LayoutParams(260,180));
+//        ExploreInfoBean.BodyBean.RecommentListBean recommentObj = recommentList.get(position);
+        ExploreInfoBean.BodyBean.RecommentListBean recommentObj = recommentList.get(position%recommentList.size());
         if(recommentObj != null){
             myViewHolder.keywordTxt.setText(recommentObj.getKeyword());
             myViewHolder.titleTxt.setText(recommentObj.getTitle());

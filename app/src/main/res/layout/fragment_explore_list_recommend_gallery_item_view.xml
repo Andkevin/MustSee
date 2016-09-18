@@ -9,45 +9,48 @@
         android:id="@+id/explore_list_recommend_gallery_item_img_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:background="@drawable/default_pic_bg"/>
+        android:background="@color/colorWhite"
+        android:alpha="40"
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="10dp"
-        android:background="@color/colorTranslucentBalck">
-    <TextView
-        android:id="@+id/explore_list_recommend_gallery_item_keyword_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="关键字"
-        android:textSize="18sp"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/colorWhite"/>
+        android:background="@color/colorTranslucentBalck"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/explore_list_recommend_gallery_item_keyword_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:text="关键字"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
 
-    <TextView
-        android:id="@+id/explore_list_recommend_gallery_item_title_tv"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:text="标题"
-        android:textSize="15sp"
-        android:layout_alignLeft="@id/explore_list_recommend_gallery_item_keyword_tv"
-        android:layout_below="@id/explore_list_recommend_gallery_item_keyword_tv"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorWhite"/>
+        <TextView
+            android:id="@+id/explore_list_recommend_gallery_item_title_tv"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/explore_list_recommend_gallery_item_keyword_tv"
+            android:layout_below="@id/explore_list_recommend_gallery_item_keyword_tv"
+            android:layout_marginTop="10dp"
+            android:text="标题"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="55dp"
-        android:layout_height="30dp"
-        android:text="查看"
-        android:textSize="15sp"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/button_half_circle_bg"
-        android:gravity="center"
-        android:layout_alignTop="@id/explore_list_recommend_gallery_item_title_tv"
-        android:layout_alignParentRight="true"/>
+        <TextView
+            android:id="@+id/explore_list_recommend_gallery_item_read_tv"
+            android:layout_width="55dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/explore_list_recommend_gallery_item_title_tv"
+            android:background="@drawable/button_half_circle_bg"
+            android:gravity="center"
+            android:text="查看"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
     </RelativeLayout>
 </RelativeLayout>
