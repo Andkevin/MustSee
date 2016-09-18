@@ -101,7 +101,7 @@ public interface HttpService {
     Observable<ExploreInfoBean> queryExploreInfo();
 
     //---查询资讯列表数据---
-    @POST("/headline/search/search.content.groovy?token=69fa71a1-d825-446a-8eb0-3baecb4b3d24")
+    @POST("/headline/search/search.content.groovy?token=1e9a8a06-beba-4df0-b86d-e1febf178024")
     Observable<NewsBean1> queryNewsSubList(@Query("keyword") String keyword, @Query("lastId") String lastId);
 //    Observable<NewsBean> queryNewsSubList(@Query("keyword") String keyword,@Query("lastId") String lastId);
 
@@ -114,11 +114,11 @@ public interface HttpService {
     Observable<SearchAutoTipBean> queryAutoSearchInfo(@Query("keyword") String keyword);
 
     //探索添加订阅
-    @POST("/headline/subscribe/subscribe.channel.add.groovy?token=69fa71a1-d825-446a-8eb0-3baecb4b3d24&category=\"\"")
+    @POST("/headline/subscribe/subscribe.channel.add.groovy?token=1e9a8a06-beba-4df0-b86d-e1febf178024&category=\"\"")
     Observable<AddBean> addSubscribe(@Query("keyword") String keyword, @Query("srpId") String srpId);
 
     //探索取消订阅
-    @POST("/headline/subscribe/subscribe.channel.delete.groovy?token=69fa71a1-d825-446a-8eb0-3baecb4b3d24")
+    @POST("/headline/subscribe/subscribe.channel.delete.groovy?token=1e9a8a06-beba-4df0-b86d-e1febf178024")
     Observable<DeleteBean> delSubscribe(@Query("keyword") String keyword, @Query("srpId") String srpId);
 
     /**

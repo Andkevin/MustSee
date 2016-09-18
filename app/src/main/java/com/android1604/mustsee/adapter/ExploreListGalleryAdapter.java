@@ -54,7 +54,7 @@ public class ExploreListGalleryAdapter extends BaseAdapter {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
         myViewHolder.imgView.setImageResource(R.mipmap.ic_launcher);
-        myViewHolder.imgView.setAlpha(100);
+//        myViewHolder.imgView.setAlpha(100);
         myViewHolder.imgView.setPadding(10,10,10,10);
         if(position < 0){
             position = position + recommentList.size();

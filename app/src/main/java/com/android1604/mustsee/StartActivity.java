@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.android1604.mustsee.presenter.IStartPresenter;
@@ -40,6 +41,7 @@ public class StartActivity extends BaseActivity implements IStartView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_start);
         startPresenter = new StartPresenterImpl(this);
         mImageView = (ImageView) findViewById(R.id.start_image_iv);

@@ -19,7 +19,7 @@
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/toolbar_back_arr" />
+                android:background="@drawable/detail_title_back" />
 
             <TextView
                 android:id="@+id/hotsub_toolbar_keyword_tv"

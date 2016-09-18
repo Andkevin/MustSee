@@ -14,7 +14,7 @@
             android:id="@+id/activity_search_toolbar_back_iv"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/toolbar_back_arr"
+            android:background="@drawable/detail_title_back"
             android:layout_marginRight="10dp"/>
 
         <LinearLayout
